@@ -1,0 +1,56 @@
+{
+  "format": "svsync-acceptance-result",
+  "stage": "0.1",
+  "sourceSpecSha256": "569e9948bdb845d9c8efcf7ca9302e9d023b9da212809596743e02b71d3ce803",
+  "implementationCommit": "63ea4338f53184b7f12453524c365c9a06504a4e",
+  "lockfileSha256": "4ed0cb3d4453c3f22ae19d667409461360193ba67eaf36d7d7c3fd5f78cdcd69",
+  "commands": [
+    "npm run test:product",
+    "npm test"
+  ],
+  "environment": {
+    "node": "v24.15.0",
+    "os": "win32",
+    "obsidian": null,
+    "device": "local Windows model runner"
+  },
+  "executedOn": "2026-09-24",
+  "runId": "pre-wp05-model-20260924-01",
+  "id": "AT-54",
+  "status": "PASS_MODEL_ONLY",
+  "fixtures": [
+    "F-JOURNAL",
+    "F-CHECKPOINT"
+  ],
+  "injectedFaults": [
+    "ClientStore sequence 2 reserved without journal event 2"
+  ],
+  "levels": [
+    {
+      "level": "model",
+      "status": "PASS",
+      "evidence": "Startup audit rejects a reserved-but-missing event without reconstructing the gap."
+    },
+    {
+      "level": "windows",
+      "status": "NOT_RUN"
+    },
+    {
+      "level": "iphone",
+      "status": "NOT_RUN"
+    }
+  ],
+  "assertions": [
+    "E_JOURNAL_INVALID",
+    "ClientStore issued sequence remains 2",
+    "journal remains one event",
+    "checkpoint lower bound remains 1"
+  ],
+  "beforeAfterEvidence": {
+    "local": "no Local write path entered",
+    "remote": "no Remote write path entered",
+    "baseline": "checkpoint sequence 1 retained",
+    "journal": "event 1 retained; reserved event 2 absent"
+  },
+  "notes": "Real persistence and process restart on both platforms remain untested."
+}

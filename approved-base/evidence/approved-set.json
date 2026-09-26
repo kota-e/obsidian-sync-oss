@@ -1,0 +1,301 @@
+{
+  "format": "svsync-gbase-approved-set",
+  "version": "1.0",
+  "date": "2026-09-06",
+  "scope": "selected-imports-and-offline-module-scaffold",
+  "sourceCommit": "08027677267934d3a1ca6f6e3cf06ee1be53ee52",
+  "productionApproved": false,
+  "sourceImports": [
+    {
+      "id": "IMP-001",
+      "kind": "exact-function-excerpt",
+      "repository": "remotely-save/remotely-save",
+      "commit": "08027677267934d3a1ca6f6e3cf06ee1be53ee52",
+      "sourcePath": "src/misc.ts",
+      "sourceBlobSha1": "046693e846d3c9799833a9624291aa6a5c99fc25",
+      "lines": [
+        117,
+        121
+      ],
+      "symbol": "copyArrayBuffer",
+      "license": "Apache-2.0",
+      "directImports": [],
+      "excerptFile": "evidence/upstream/remotely-save-copyArrayBuffer.lines117-121.txt",
+      "destination": "src/inherited/buffer-range.ts",
+      "sourceBytesSha256": "dc5a1eb798535f05f651e7b5a64965175b0b2ecaafd18e674b35f19ea649a168",
+      "destinationSha256": "421751db68a7243a4c4c1d2e44fce4b58f0807fc5dda8df3bc44347f0aac8462",
+      "status": "approved-for-listed-checkpoint-only"
+    },
+    {
+      "id": "IMP-002",
+      "kind": "exact-function-excerpt",
+      "repository": "remotely-save/remotely-save",
+      "commit": "08027677267934d3a1ca6f6e3cf06ee1be53ee52",
+      "sourcePath": "src/misc.ts",
+      "sourceBlobSha1": "046693e846d3c9799833a9624291aa6a5c99fc25",
+      "lines": [
+        281,
+        307
+      ],
+      "symbol": "SplitRange + getSplitRanges",
+      "license": "Apache-2.0",
+      "directImports": [],
+      "excerptFile": "evidence/upstream/remotely-save-getSplitRanges.lines281-307.txt",
+      "destination": "src/inherited/buffer-range.ts",
+      "sourceBytesSha256": "62c5e129aafa639c17fc061807cecca03eb3ed0ff4ea2c4051562a426dd9ef26",
+      "destinationSha256": "421751db68a7243a4c4c1d2e44fce4b58f0807fc5dda8df3bc44347f0aac8462",
+      "status": "approved-for-listed-checkpoint-only"
+    },
+    {
+      "id": "IMP-003",
+      "kind": "signer-only-derivative",
+      "repository": "mhart/aws4fetch",
+      "commit": "629b108747e066d1b93e8b72a4adbf2a4220db3b",
+      "sourcePath": "dist/aws4fetch.esm.mjs",
+      "sourceBlobSha1": "9c27de4db12fae710956c03888f95a4242073735",
+      "sourceFile": "evidence/upstream/aws4fetch.esm.mjs",
+      "sourceReview": "full file; original Git blob independently recomputed",
+      "license": "MIT",
+      "directImports": [],
+      "destination": "evidence/derived/aws4fetch-signer/index.mjs",
+      "change": "Remove AwsClient class and export only; keep signer/helpers; prepend explicit modification notice",
+      "sourceBytesSha256": "3049cd99d00a2fb83ce0e77f0e6b3fb22c17d8e708b740821f906145a8f978e9",
+      "destinationSha256": "8707c999823419c483fd6da731a1051fba1c5edb6a0903915810b81bd140fa30",
+      "status": "approved-for-listed-checkpoint-only"
+    }
+  ],
+  "packages": [
+    {
+      "name": "@svsync/aws4fetch-signer",
+      "version": "1.0.20-svsync.1",
+      "scope": "runtime",
+      "archive": "vendor/packages/aws4fetch-signer-1.0.20-svsync.1.tgz",
+      "archiveSha256": "977c6babbc560f65479d37133de37d917847f6015cb8a30a6ea25fb692042193",
+      "integrity": "sha512-IlGfzTdDC2Mj65LPbkrwnrQfFklqG9uE+hN7fE+3XkVP0rlVqFlgubjNy4hOKS4pREedMwg3w3a8l4hSV3mNYw==",
+      "inventoryFile": "evidence/aws4fetch-signer-1.0.20-svsync.1.inventory.json",
+      "fileCount": 5,
+      "archiveBytes": 7653,
+      "unpackedBytes": 21037,
+      "runtimeDependencies": [],
+      "optionalDependencies": [],
+      "peerDependencies": []
+    },
+    {
+      "name": "typescript",
+      "version": "5.8.3",
+      "scope": "development",
+      "archive": "vendor/packages/typescript-5.8.3-local-snapshot.tgz",
+      "archiveSha256": "6ed8b05aaef9597e5718015d3745c2ae945dd6aa2db4869dbf38aa74d0d35f42",
+      "integrity": "sha512-mZMBhXHy1KlH4EhDPkIIgcI5xCgwq9a6sxRehMiDAdW4H86g/PPAYvW8xPY6vGAlSx4feQKAfuhsdzUAaCdeFQ==",
+      "inventoryFile": "evidence/typescript-5.8.3-local-snapshot.inventory.json",
+      "fileCount": 130,
+      "archiveBytes": 4245442,
+      "unpackedBytes": 22867703,
+      "runtimeDependencies": [],
+      "optionalDependencies": [],
+      "peerDependencies": []
+    }
+  ],
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 57,
+      "sha256": "eb667f4d5ede0fc4bfb47d24c0d5a5e8591a4a01049057317e98246fac44271a"
+    },
+    {
+      "path": ".npmrc",
+      "bytes": 43,
+      "sha256": "8c3206afff0ca4259186f7a47b8a30485b45ade5070deddf3aaead412d936e3a"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 9197,
+      "sha256": "a7d00bfd54525bc694b6e32f64c7ebcf5e6b7ae3657be5cc12767bce74654a47"
+    },
+    {
+      "path": "NOTICE",
+      "bytes": 1300,
+      "sha256": "29ecb7e9f480d56c0644896632cf6500521c79bfe22695ed82aa7b81c5d95e22"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2531,
+      "sha256": "a591c249581669ea493771aa8e4a12f91c4437b47c098e9fd796b703102613a4"
+    },
+    {
+      "path": "docs/DEPENDENCY_LICENSE_REVIEW.md",
+      "bytes": 10731,
+      "sha256": "6f18f4211550c213c1812080c8b5ae3448f310206458b13c6166972d65cf7a02"
+    },
+    {
+      "path": "docs/SOURCE_IMPORT_MANIFEST.md",
+      "bytes": 11593,
+      "sha256": "16b6c9bc9bc3a909ee809d7512fc810f4fc5bd8e695b4132053011bd1cf66aa9"
+    },
+    {
+      "path": "evidence/aws4fetch-signer-1.0.20-svsync.1.inventory.json",
+      "bytes": 688,
+      "sha256": "aedd8c22e9bcc511ad66f5a9983fefa87e1224ebc530f2f1917a0a487ff31fad"
+    },
+    {
+      "path": "evidence/derived/aws4fetch-signer/LICENSE",
+      "bytes": 1080,
+      "sha256": "a9455541e8a4e4766d146a7552ac547c04bfb7a8718f5af516f1b9e346e82a77"
+    },
+    {
+      "path": "evidence/derived/aws4fetch-signer/LICENSE-LOCAL-TYPES.txt",
+      "bytes": 9197,
+      "sha256": "a7d00bfd54525bc694b6e32f64c7ebcf5e6b7ae3657be5cc12767bce74654a47"
+    },
+    {
+      "path": "evidence/derived/aws4fetch-signer/index.d.mts",
+      "bytes": 676,
+      "sha256": "c0a428ff02b5dfe2e857e7f8975f5744664e8e7118766f36c27c85e68b460afc"
+    },
+    {
+      "path": "evidence/derived/aws4fetch-signer/index.mjs",
+      "bytes": 9685,
+      "sha256": "8707c999823419c483fd6da731a1051fba1c5edb6a0903915810b81bd140fa30"
+    },
+    {
+      "path": "evidence/derived/aws4fetch-signer/package.json",
+      "bytes": 399,
+      "sha256": "7f154692aacccf7dddc78649b4b0e0710d74813134053f3d239c4da519f43bcd"
+    },
+    {
+      "path": "evidence/input-documents.json",
+      "bytes": 451,
+      "sha256": "bf85d31a21e8410ef5cdfd36623b28d10752886d1359e5b6be90dd25771c0d50"
+    },
+    {
+      "path": "evidence/source-imports.json",
+      "bytes": 4907,
+      "sha256": "78acb81059c4db8db5554c669c65e651e5e9e33eeb04f8b9b20f5d4d95340b25"
+    },
+    {
+      "path": "evidence/typescript-5.8.3-local-snapshot.inventory.json",
+      "bytes": 19637,
+      "sha256": "5880103d9f4f0539328dde4f54d850a399b6a4d98d2468ae57098bc0fb7aee50"
+    },
+    {
+      "path": "evidence/upstream/aws4fetch.esm.mjs",
+      "bytes": 11283,
+      "sha256": "3049cd99d00a2fb83ce0e77f0e6b3fb22c17d8e708b740821f906145a8f978e9"
+    },
+    {
+      "path": "evidence/upstream/remotely-save-copyArrayBuffer.lines117-121.txt",
+      "bytes": 167,
+      "sha256": "dc5a1eb798535f05f651e7b5a64965175b0b2ecaafd18e674b35f19ea649a168"
+    },
+    {
+      "path": "evidence/upstream/remotely-save-getSplitRanges.lines281-307.txt",
+      "bytes": 696,
+      "sha256": "62c5e129aafa639c17fc061807cecca03eb3ed0ff4ea2c4051562a426dd9ef26"
+    },
+    {
+      "path": "licenses/Apache-2.0.txt",
+      "bytes": 9197,
+      "sha256": "a7d00bfd54525bc694b6e32f64c7ebcf5e6b7ae3657be5cc12767bce74654a47"
+    },
+    {
+      "path": "licenses/TypeScript-ThirdPartyNoticeText.txt",
+      "bytes": 37824,
+      "sha256": "1af3c68039c57e539422da82a4faada506ce6d0ea6f90e0b699d02dbcdb7a90c"
+    },
+    {
+      "path": "licenses/aws4fetch-MIT.txt",
+      "bytes": 1080,
+      "sha256": "a9455541e8a4e4766d146a7552ac547c04bfb7a8718f5af516f1b9e346e82a77"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 1324,
+      "sha256": "9190445fd15f52a36eece4f26a45ccff1245ef39e1ddbb7e3b86556cda8e0eb3"
+    },
+    {
+      "path": "package.json",
+      "bytes": 660,
+      "sha256": "3e35061f3761f748eefe07afc69a93120961df084e5da6add7f410dd42d09749"
+    },
+    {
+      "path": "scripts/verify-gate.mjs",
+      "bytes": 12628,
+      "sha256": "8642ed516056a5e69f39d2f8ac6fbae6fe9eb2be8e4a562c19bf17ce64337437"
+    },
+    {
+      "path": "src/core/checked-range.ts",
+      "bytes": 723,
+      "sha256": "49fe19b747759cd0a266026a76b3c8a3802c0671712f0dcd7374e985e71b90cd"
+    },
+    {
+      "path": "src/inherited/buffer-range.ts",
+      "bytes": 1421,
+      "sha256": "421751db68a7243a4c4c1d2e44fce4b58f0807fc5dda8df3bc44347f0aac8462"
+    },
+    {
+      "path": "src/r2/sign-request.ts",
+      "bytes": 4194,
+      "sha256": "2f0f994e54a92a0b2c7dff04ad4a6610d3da78d6bf0b0088dc82b8dda94f17f4"
+    },
+    {
+      "path": "tests/boundary.test.mjs",
+      "bytes": 2994,
+      "sha256": "fe02249f7b8d669ed25cd36bcfcb800b055224d674feda3dabec9d06f46b76d7"
+    },
+    {
+      "path": "tests/imports.test.mjs",
+      "bytes": 8002,
+      "sha256": "b52c6a4822ff94dc16d03a304c2dd48c750318db5fb9c77a989596dd22f227f0"
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 566,
+      "sha256": "b0ac1715f3a3aad30e8e7dd8e6a2ba368ee1f86b93c32bf7e4ce0f7a9477ec08"
+    },
+    {
+      "path": "vendor/packages/aws4fetch-signer-1.0.20-svsync.1.tgz",
+      "bytes": 7653,
+      "sha256": "977c6babbc560f65479d37133de37d917847f6015cb8a30a6ea25fb692042193"
+    },
+    {
+      "path": "vendor/packages/typescript-5.8.3-local-snapshot.tgz",
+      "bytes": 4245442,
+      "sha256": "6ed8b05aaef9597e5718015d3745c2ae945dd6aa2db4869dbf38aa74d0d35f42"
+    }
+  ],
+  "compiledFiles": [
+    {
+      "path": ".build/core/checked-range.d.ts",
+      "sha256": "4ebf21c7c5b8361b4034426d8ab13391fce0ef4a09facaa70f29f621826c6349"
+    },
+    {
+      "path": ".build/core/checked-range.js",
+      "sha256": "79e37d109bbe360e2e08521304d30251edef34f593bd1b3fde94c534c8704d11"
+    },
+    {
+      "path": ".build/inherited/buffer-range.d.ts",
+      "sha256": "497b9ea874a1802e53fe990b379c654aa90f6edd04b1176d98ea91fbb3f9a58a"
+    },
+    {
+      "path": ".build/inherited/buffer-range.js",
+      "sha256": "6c9a141d8d5d45793a2224674edca96326f58a58085d76146111cbcc7c833538"
+    },
+    {
+      "path": ".build/r2/sign-request.d.ts",
+      "sha256": "269197ba65384f370081e27668d448a60366449d16dcec8fc40e8ad699e697d3"
+    },
+    {
+      "path": ".build/r2/sign-request.js",
+      "sha256": "afc447475468b9d5c67518b5bf7b4b360c404ceaff6e864018b19264c09d9c4c"
+    }
+  ],
+  "exclusions": [
+    "All unlisted source imports",
+    "Pro",
+    "Obsidian integration",
+    "Actual R2 transport",
+    "Production distribution",
+    "Future dependencies"
+  ],
+  "manifestTrust": "Hash anchored to the completion report; not signed publisher attestation"
+}

@@ -1,0 +1,79 @@
+[
+  {
+    "id": "A",
+    "path": "fixtures/bytes/A.bin",
+    "bytes": 2,
+    "sha256": "06f961b802bc46ee168555f066d28f4f0e9afdf3f88174c1ee6f9de004fc30a0",
+    "hex": "410a"
+  },
+  {
+    "id": "B",
+    "path": "fixtures/bytes/B.bin",
+    "bytes": 2,
+    "sha256": "c0cde77fa8fef97d476c10aad3d2d54fcc2f336140d073651c2dcccf1e379fd6",
+    "hex": "420a"
+  },
+  {
+    "id": "C",
+    "path": "fixtures/bytes/C.bin",
+    "bytes": 2,
+    "sha256": "12f37a8a84034d3e623d726fe10e5031f4df997ac13f4d5571b5a90c41fb84fe",
+    "hex": "430a"
+  },
+  {
+    "id": "D",
+    "path": "fixtures/bytes/D.bin",
+    "bytes": 2,
+    "sha256": "7c447aa2524264a3e24df73a6fddd8db360840f895bcb5e54d643c18de26a8ae",
+    "hex": "440a"
+  },
+  {
+    "id": "empty",
+    "path": "fixtures/bytes/empty.bin",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "hex": ""
+  },
+  {
+    "id": "crlf",
+    "path": "fixtures/bytes/crlf.bin",
+    "bytes": 3,
+    "sha256": "26ffd5886253906a36a7ea0f6e26056fc36472626cb4894bcb100a34dc69d1db",
+    "hex": "410d0a"
+  },
+  {
+    "id": "bom-ja",
+    "path": "fixtures/bytes/bom-ja.bin",
+    "bytes": 10,
+    "sha256": "d85695f624b1c66732adaac4ea04f4f72951fed143d644659fa73b3568fbea74",
+    "hex": "efbbbfe383a1e383a20a"
+  },
+  {
+    "id": "non-bmp",
+    "path": "fixtures/bytes/non-bmp.bin",
+    "bytes": 11,
+    "sha256": "cbb4910ac26480100877f4ec5fa075cca6a5b8338d0525b3cb7ead62fbb16eff",
+    "hex": "6e6f74653a20f09f9a800a"
+  },
+  {
+    "id": "combining",
+    "path": "fixtures/bytes/combining.bin",
+    "bytes": 4,
+    "sha256": "f979a211b00b61497349a7c753652a3d173550a368711a9f9f9845e6383db7cb",
+    "hex": "65cc810a"
+  },
+  {
+    "id": "invalid-utf8",
+    "path": "fixtures/bytes/invalid-utf8.bin",
+    "bytes": 2,
+    "sha256": "eddf68639913a3cb8331cdfe7f87559e0beccf2c289c0d90ac4d89b3204004f8",
+    "hex": "c328"
+  },
+  {
+    "id": "nul-text",
+    "path": "fixtures/bytes/nul-text.bin",
+    "bytes": 4,
+    "sha256": "3a100994c4e38751871e6e8eef9adad2b20177fdeaf650daacdcd74f4c9421e3",
+    "hex": "6100620a"
+  }
+]

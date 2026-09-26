@@ -1,0 +1,64 @@
+{
+  "format": "svsync-handoff-preflight",
+  "status": "PASS",
+  "node": "v22.16.0",
+  "platform": "linux",
+  "arch": "x64",
+  "steps": [
+    {
+      "id": "01-handoff",
+      "status": "PASS",
+      "log": "reports-local/preflight/01-handoff.log"
+    },
+    {
+      "id": "02-base-install",
+      "status": "PASS",
+      "log": "reports-local/preflight/02-base-install.log"
+    },
+    {
+      "id": "03-base-build",
+      "status": "PASS",
+      "log": "reports-local/preflight/03-base-build.log"
+    },
+    {
+      "id": "04-base-tests",
+      "status": "PASS",
+      "log": "reports-local/preflight/04-base-tests.log"
+    },
+    {
+      "id": "05-base-gate",
+      "status": "PASS",
+      "log": "reports-local/preflight/05-base-gate.log"
+    },
+    {
+      "id": "06-prepare-workspace",
+      "status": "PASS",
+      "log": "reports-local/preflight/06-prepare-workspace.log"
+    },
+    {
+      "id": "07-workspace-install",
+      "status": "PASS",
+      "log": "reports-local/preflight/07-workspace-install.log"
+    },
+    {
+      "id": "08-workspace-boundary",
+      "status": "PASS",
+      "log": "reports-local/preflight/08-workspace-boundary.log"
+    },
+    {
+      "id": "09-workspace-import-tests",
+      "status": "PASS",
+      "log": "reports-local/preflight/09-workspace-import-tests.log"
+    },
+    {
+      "id": "10-contract-typecheck",
+      "status": "PASS",
+      "log": "reports-local/preflight/10-contract-typecheck.log"
+    }
+  ],
+  "liveServiceRequests": false,
+  "productTestsExecuted": false,
+  "npm": "10.9.2",
+  "baselineTestCount": 37,
+  "readyFor": "WP-01 offline pure-core implementation only"
+}

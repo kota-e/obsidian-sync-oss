@@ -1,0 +1,22 @@
+{
+  "name": "@svsync/gbase-approved-inputs",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "description": "Audited source-import and dependency checkpoint, NOT an installable Obsidian plugin",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "gate": "node scripts/verify-gate.mjs"
+  },
+  "dependencies": {
+    "@svsync/aws4fetch-signer": "file:vendor/packages/aws4fetch-signer-1.0.20-svsync.1.tgz"
+  },
+  "devDependencies": {
+    "typescript": "file:vendor/packages/typescript-5.8.3-local-snapshot.tgz"
+  }
+}

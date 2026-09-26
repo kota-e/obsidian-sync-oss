@@ -1,0 +1,17 @@
+{
+  "name": "@svsync/aws4fetch-signer",
+  "version": "1.0.20-svsync.1",
+  "private": true,
+  "type": "module",
+  "license": "MIT AND Apache-2.0",
+  "description": "Locally derived signer-only aws4fetch snapshot; no transport",
+  "main": "index.mjs",
+  "types": "index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./index.d.mts",
+      "default": "./index.mjs"
+    }
+  },
+  "dependencies": {}
+}

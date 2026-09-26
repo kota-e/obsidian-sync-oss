@@ -1,0 +1,24 @@
+{
+  "name": "@svsync/mvp-workspace",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "description": "Audited source-import and dependency checkpoint, NOT an installable Obsidian plugin",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "node ../tools/run-workspace-tests.mjs all",
+    "test:imports": "node ../tools/run-workspace-tests.mjs imports",
+    "test:product": "node ../tools/run-workspace-tests.mjs product",
+    "check:boundary": "node ../tools/verify-workspace.mjs"
+  },
+  "dependencies": {
+    "@svsync/aws4fetch-signer": "file:vendor/packages/aws4fetch-signer-1.0.20-svsync.1.tgz"
+  },
+  "devDependencies": {
+    "typescript": "file:vendor/packages/typescript-5.8.3-local-snapshot.tgz"
+  }
+}

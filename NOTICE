@@ -1,0 +1,7 @@
+Obsidian synchronization OSS implementation handoff, 2026-09-06.
+This is an independent, pre-implementation document and tooling package.
+Original project-owned additions are provided under Apache License 2.0.
+Selected Remotely Save contributions by fyears and contributors retain their original notices.
+The aws4fetch-derived signer by Michael Hart retains its MIT notice.
+See approved-base/NOTICE, approved-base/licenses/, and docs/SOURCE_IMPORT_MANIFEST.md.
+No endorsement, official successor status, full protocol compatibility, or zero-data-loss warranty is implied.

@@ -1,0 +1,22 @@
+{
+  "unitAndBoundaryTests": {
+    "tests": 37,
+    "pass": 37,
+    "fail": 0,
+    "skipped": 0,
+    "cancelled": 0
+  },
+  "gateGroups": 12,
+  "gatePassed": true,
+  "approvedSetSha256": "19e2ff63173623ec012ecb5c5fd6710483875ea747e0ce8e42e772d0765828b3",
+  "cleanZipReplay": true,
+  "testNetworkRequests": 0,
+  "sourceDocsUnchanged": true,
+  "notExecuted": [
+    "Obsidian runtime",
+    "Real R2 calls",
+    "Windows/iPhone real device tests",
+    "Product AT-01 through AT-84",
+    "Third-party forensic/security certification"
+  ]
+}

@@ -1,0 +1,155 @@
+{
+  "format": "svsync-workspace-policy",
+  "scope": "fixed-import-and-dependency-boundary-not-product-approval",
+  "pinned": [
+    {
+      "path": "LICENSE",
+      "sha256": "a7d00bfd54525bc694b6e32f64c7ebcf5e6b7ae3657be5cc12767bce74654a47"
+    },
+    {
+      "path": ".npmrc",
+      "sha256": "8c3206afff0ca4259186f7a47b8a30485b45ade5070deddf3aaead412d936e3a"
+    },
+    {
+      "path": "NOTICE",
+      "sha256": "29ecb7e9f480d56c0644896632cf6500521c79bfe22695ed82aa7b81c5d95e22"
+    },
+    {
+      "path": "tsconfig.json",
+      "sha256": "b0ac1715f3a3aad30e8e7dd8e6a2ba368ee1f86b93c32bf7e4ce0f7a9477ec08"
+    },
+    {
+      "path": "tests/imports.test.mjs",
+      "sha256": "b52c6a4822ff94dc16d03a304c2dd48c750318db5fb9c77a989596dd22f227f0"
+    },
+    {
+      "path": "licenses/TypeScript-ThirdPartyNoticeText.txt",
+      "sha256": "1af3c68039c57e539422da82a4faada506ce6d0ea6f90e0b699d02dbcdb7a90c"
+    },
+    {
+      "path": "licenses/aws4fetch-MIT.txt",
+      "sha256": "a9455541e8a4e4766d146a7552ac547c04bfb7a8718f5af516f1b9e346e82a77"
+    },
+    {
+      "path": "licenses/Apache-2.0.txt",
+      "sha256": "a7d00bfd54525bc694b6e32f64c7ebcf5e6b7ae3657be5cc12767bce74654a47"
+    },
+    {
+      "path": "vendor/packages/typescript-5.8.3-local-snapshot.tgz",
+      "sha256": "6ed8b05aaef9597e5718015d3745c2ae945dd6aa2db4869dbf38aa74d0d35f42"
+    },
+    {
+      "path": "vendor/packages/aws4fetch-signer-1.0.20-svsync.1.tgz",
+      "sha256": "977c6babbc560f65479d37133de37d917847f6015cb8a30a6ea25fb692042193"
+    },
+    {
+      "path": "src/inherited/buffer-range.ts",
+      "sha256": "421751db68a7243a4c4c1d2e44fce4b58f0807fc5dda8df3bc44347f0aac8462"
+    },
+    {
+      "path": "src/r2/sign-request.ts",
+      "sha256": "2f0f994e54a92a0b2c7dff04ad4a6610d3da78d6bf0b0088dc82b8dda94f17f4"
+    },
+    {
+      "path": "src/core/checked-range.ts",
+      "sha256": "49fe19b747759cd0a266026a76b3c8a3802c0671712f0dcd7374e985e71b90cd"
+    },
+    {
+      "path": "evidence/upstream/remotely-save-getSplitRanges.lines281-307.txt",
+      "sha256": "62c5e129aafa639c17fc061807cecca03eb3ed0ff4ea2c4051562a426dd9ef26"
+    },
+    {
+      "path": "evidence/upstream/remotely-save-copyArrayBuffer.lines117-121.txt",
+      "sha256": "dc5a1eb798535f05f651e7b5a64965175b0b2ecaafd18e674b35f19ea649a168"
+    },
+    {
+      "path": "evidence/upstream/aws4fetch.esm.mjs",
+      "sha256": "3049cd99d00a2fb83ce0e77f0e6b3fb22c17d8e708b740821f906145a8f978e9"
+    }
+  ],
+  "packageJson": {
+    "name": "@svsync/mvp-workspace",
+    "version": "0.0.0",
+    "private": true,
+    "type": "module",
+    "license": "Apache-2.0",
+    "description": "Audited source-import and dependency checkpoint, NOT an installable Obsidian plugin",
+    "engines": {
+      "node": ">=22"
+    },
+    "scripts": {
+      "build": "tsc -p tsconfig.json",
+      "test": "node ../tools/run-workspace-tests.mjs all",
+      "test:imports": "node ../tools/run-workspace-tests.mjs imports",
+      "test:product": "node ../tools/run-workspace-tests.mjs product",
+      "check:boundary": "node ../tools/verify-workspace.mjs"
+    },
+    "dependencies": {
+      "@svsync/aws4fetch-signer": "file:vendor/packages/aws4fetch-signer-1.0.20-svsync.1.tgz"
+    },
+    "devDependencies": {
+      "typescript": "file:vendor/packages/typescript-5.8.3-local-snapshot.tgz"
+    }
+  },
+  "packageLock": {
+    "name": "@svsync/mvp-workspace",
+    "version": "0.0.0",
+    "lockfileVersion": 3,
+    "requires": true,
+    "packages": {
+      "": {
+        "name": "@svsync/mvp-workspace",
+        "version": "0.0.0",
+        "license": "Apache-2.0",
+        "dependencies": {
+          "@svsync/aws4fetch-signer": "file:vendor/packages/aws4fetch-signer-1.0.20-svsync.1.tgz"
+        },
+        "devDependencies": {
+          "typescript": "file:vendor/packages/typescript-5.8.3-local-snapshot.tgz"
+        },
+        "engines": {
+          "node": ">=22"
+        }
+      },
+      "node_modules/@svsync/aws4fetch-signer": {
+        "version": "1.0.20-svsync.1",
+        "resolved": "file:vendor/packages/aws4fetch-signer-1.0.20-svsync.1.tgz",
+        "integrity": "sha512-IlGfzTdDC2Mj65LPbkrwnrQfFklqG9uE+hN7fE+3XkVP0rlVqFlgubjNy4hOKS4pREedMwg3w3a8l4hSV3mNYw==",
+        "license": "MIT AND Apache-2.0"
+      },
+      "node_modules/typescript": {
+        "version": "5.8.3",
+        "resolved": "file:vendor/packages/typescript-5.8.3-local-snapshot.tgz",
+        "integrity": "sha512-mZMBhXHy1KlH4EhDPkIIgcI5xCgwq9a6sxRehMiDAdW4H86g/PPAYvW8xPY6vGAlSx4feQKAfuhsdzUAaCdeFQ==",
+        "dev": true,
+        "license": "Apache-2.0",
+        "bin": {
+          "tsc": "bin/tsc",
+          "tsserver": "bin/tsserver"
+        },
+        "engines": {
+          "node": ">=14.17"
+        }
+      }
+    }
+  },
+  "allowedTop": [
+    ".handoff-workspace.json",
+    ".gitignore",
+    ".npmrc",
+    "LICENSE",
+    "NOTICE",
+    "src",
+    "tests",
+    "evidence",
+    "vendor",
+    "licenses",
+    "node_modules",
+    ".build",
+    "package.json",
+    "package-lock.json",
+    "tsconfig.json",
+    "reports-local",
+    ".cache"
+  ]
+}

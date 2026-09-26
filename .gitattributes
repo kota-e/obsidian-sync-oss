@@ -1,0 +1,2 @@
+# Keep audited byte hashes identical after checkout, including on Windows.
+* -text

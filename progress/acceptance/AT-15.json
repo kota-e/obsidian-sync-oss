@@ -1,0 +1,49 @@
+{
+  "format": "svsync-acceptance-result",
+  "stage": "0.1",
+  "sourceSpecSha256": "569e9948bdb845d9c8efcf7ca9302e9d023b9da212809596743e02b71d3ce803",
+  "implementationCommit": "63ea4338f53184b7f12453524c365c9a06504a4e",
+  "lockfileSha256": "4ed0cb3d4453c3f22ae19d667409461360193ba67eaf36d7d7c3fd5f78cdcd69",
+  "commands": [
+    "npm run test:product",
+    "npm test"
+  ],
+  "environment": {
+    "node": "v24.15.0",
+    "os": "win32",
+    "obsidian": null,
+    "device": "local Windows model runner"
+  },
+  "executedOn": "2026-09-24",
+  "runId": "pre-wp05-model-20260924-01",
+  "id": "AT-15",
+  "status": "PASS",
+  "fixtures": [
+    "F-FUTURE-CAPABILITY",
+    "F-EQUAL"
+  ],
+  "injectedFaults": [
+    "head.requiredCapabilities=unknown-future-v9",
+    "manifest.requiredCapabilities=unknown-future-v9 with internally consistent hashes"
+  ],
+  "levels": [
+    {
+      "level": "model",
+      "status": "PASS",
+      "evidence": "Verified Remote read refuses both head and manifest variants before a snapshot is issued."
+    }
+  ],
+  "assertions": [
+    "valid control snapshot read succeeds",
+    "E_FORMAT_UNSUPPORTED for each variant",
+    "head unchanged during read",
+    "Remote PUT counters 0"
+  ],
+  "beforeAfterEvidence": {
+    "local": "no Local write path entered",
+    "remote": "tampered fixture head unchanged by read; PUT counters 0",
+    "baseline": "no baseline mutation path entered",
+    "journal": "no journal mutation path entered"
+  },
+  "notes": "All levels required by AT-15 are model. Real R2 capability handling remains a separate later gate."
+}

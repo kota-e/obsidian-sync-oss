@@ -1,0 +1,44 @@
+0 verbose cli /opt/nvm/versions/node/v22.16.0/bin/node /opt/nvm/versions/node/v22.16.0/bin/npm
+1 info using npm@10.9.2
+2 info using node@v22.16.0
+3 silly config load:file:/opt/nvm/versions/node/v22.16.0/lib/node_modules/npm/npmrc
+4 silly config load:file:/mnt/data/gbase_approved_20260906/.npmrc
+5 silly config load:file:/home/oai/.npmrc
+6 silly config load:file:/opt/nvm/versions/node/v22.16.0/etc/npmrc
+7 verbose title npm ci
+8 verbose argv "ci" "--offline" "--ignore-scripts" "--no-audit" "--no-fund" "--cache" "/mnt/data/gbase_second_empty_cache"
+9 verbose logfile logs-max:10 dir:/mnt/data/gbase_second_empty_cache/_logs/2026-09-06T02_16_44_945Z-
+10 verbose logfile /mnt/data/gbase_second_empty_cache/_logs/2026-09-06T02_16_44_945Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:2197815296 maxSize:549453824 maxEntrySize:274726912
+13 silly idealTree buildDeps
+14 silly reify moves {}
+15 http cache typescript@file:/mnt/data/gbase_approved_20260906/vendor/packages/typescript-5.8.3-local-snapshot.tgz 1ms (cache hit)
+16 silly tarball no local data for typescript@file:/mnt/data/gbase_approved_20260906/vendor/packages/typescript-5.8.3-local-snapshot.tgz. Extracting by manifest.
+17 http cache @svsync/aws4fetch-signer@file:/mnt/data/gbase_approved_20260906/vendor/packages/aws4fetch-signer-1.0.20-svsync.1.tgz 0ms (cache hit)
+18 silly tarball no local data for @svsync/aws4fetch-signer@file:/mnt/data/gbase_approved_20260906/vendor/packages/aws4fetch-signer-1.0.20-svsync.1.tgz. Extracting by manifest.
+19 warn tarball tarball data for @svsync/aws4fetch-signer@file:/mnt/data/gbase_approved_20260906/vendor/packages/aws4fetch-signer-1.0.20-svsync.1.tgz (sha512-3bP3izCVAcXUz7fa2DgpxlLhWePWR2bJ5ybBp4AV2bhqdzcTRUzeJt5Igm/gDqCJR6WSOJChDaPLogYwV7Kwmw==) seems to be corrupted. Trying again.
+20 warn tarball tarball data for @svsync/aws4fetch-signer@file:/mnt/data/gbase_approved_20260906/vendor/packages/aws4fetch-signer-1.0.20-svsync.1.tgz (sha512-3bP3izCVAcXUz7fa2DgpxlLhWePWR2bJ5ybBp4AV2bhqdzcTRUzeJt5Igm/gDqCJR6WSOJChDaPLogYwV7Kwmw==) seems to be corrupted. Trying again.
+21 verbose stack Error: sha512-3bP3izCVAcXUz7fa2DgpxlLhWePWR2bJ5ybBp4AV2bhqdzcTRUzeJt5Igm/gDqCJR6WSOJChDaPLogYwV7Kwmw== integrity checksum failed when using sha512: wanted sha512-3bP3izCVAcXUz7fa2DgpxlLhWePWR2bJ5ybBp4AV2bhqdzcTRUzeJt5Igm/gDqCJR6WSOJChDaPLogYwV7Kwmw== but got sha512-IlGfzTdDC2Mj65LPbkrwnrQfFklqG9uE+hN7fE+3XkVP0rlVqFlgubjNy4hOKS4pREedMwg3w3a8l4hSV3mNYw==. (7653 bytes)
+21 verbose stack     at #onEnd (/opt/nvm/versions/node/v22.16.0/lib/node_modules/npm/node_modules/ssri/lib/index.js:111:19)
+21 verbose stack     at IntegrityStream.emit (/opt/nvm/versions/node/v22.16.0/lib/node_modules/npm/node_modules/ssri/lib/index.js:81:18)
+21 verbose stack     at [maybeEmitEnd] (/opt/nvm/versions/node/v22.16.0/lib/node_modules/npm/node_modules/minipass/dist/commonjs/index.js:713:18)
+21 verbose stack     at IntegrityStream.emit (/opt/nvm/versions/node/v22.16.0/lib/node_modules/npm/node_modules/minipass/dist/commonjs/index.js:784:33)
+21 verbose stack     at IntegrityStream.emit (/opt/nvm/versions/node/v22.16.0/lib/node_modules/npm/node_modules/ssri/lib/index.js:83:18)
+21 verbose stack     at [resume] (/opt/nvm/versions/node/v22.16.0/lib/node_modules/npm/node_modules/minipass/dist/commonjs/index.js:478:14)
+21 verbose stack     at Pipe.ondrain (/opt/nvm/versions/node/v22.16.0/lib/node_modules/npm/node_modules/minipass/dist/commonjs/index.js:103:41)
+21 verbose stack     at WriteStream.emit (node:events:518:28)
+21 verbose stack     at WriteStream.emit (/opt/nvm/versions/node/v22.16.0/lib/node_modules/npm/node_modules/fs-minipass/lib/index.js:260:18)
+21 verbose stack     at [_onwrite] (/opt/nvm/versions/node/v22.16.0/lib/node_modules/npm/node_modules/fs-minipass/lib/index.js:358:16)
+22 error code EINTEGRITY
+23 error sha512-3bP3izCVAcXUz7fa2DgpxlLhWePWR2bJ5ybBp4AV2bhqdzcTRUzeJt5Igm/gDqCJR6WSOJChDaPLogYwV7Kwmw== integrity checksum failed when using sha512: wanted sha512-3bP3izCVAcXUz7fa2DgpxlLhWePWR2bJ5ybBp4AV2bhqdzcTRUzeJt5Igm/gDqCJR6WSOJChDaPLogYwV7Kwmw== but got sha512-IlGfzTdDC2Mj65LPbkrwnrQfFklqG9uE+hN7fE+3XkVP0rlVqFlgubjNy4hOKS4pREedMwg3w3a8l4hSV3mNYw==. (7653 bytes)
+24 silly unfinished npm timer reify 1788661005107
+25 silly unfinished npm timer reify:unpack 1788661005113
+26 silly unfinished npm timer reifyNode:node_modules/@svsync/aws4fetch-signer 1788661005113
+27 verbose cwd /mnt/data/gbase_approved_20260906
+28 verbose os Linux 6.18.35
+29 verbose node v22.16.0
+30 verbose npm  v10.9.2
+31 verbose exit 1
+32 verbose code 1
+33 error A complete log of this run can be found in: /mnt/data/gbase_second_empty_cache/_logs/2026-09-06T02_16_44_945Z-debug-0.log

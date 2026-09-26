@@ -1,0 +1,27 @@
+export interface SplitRange {
+  partNum: number; // startting from 1
+  start: number;
+  end: number; // exclusive
+}
+export const getSplitRanges = (bytesTotal: number, bytesEachPart: number) => {
+  const res: SplitRange[] = [];
+  if (bytesEachPart >= bytesTotal) {
+    res.push({
+      partNum: 1,
+      start: 0,
+      end: bytesTotal,
+    });
+    return res;
+  }
+  const remainder = bytesTotal % bytesEachPart;
+  const howMany =
+    Math.floor(bytesTotal / bytesEachPart) + (remainder === 0 ? 0 : 1);
+  for (let i = 0; i < howMany; ++i) {
+    res.push({
+      partNum: i + 1,
+      start: bytesEachPart * i,
+      end: Math.min(bytesEachPart * (i + 1), bytesTotal),
+    });
+  }
+  return res;
+};

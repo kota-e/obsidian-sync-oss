@@ -1,0 +1,88 @@
+TAP version 13
+# Subtest: HP01: sealed handoff verifies
+ok 1 - HP01: sealed handoff verifies
+  ---
+  duration_ms: 58.070244
+  type: 'test'
+  ...
+# Subtest: HP02: missing AT is not accepted
+ok 2 - HP02: missing AT is not accepted
+  ---
+  duration_ms: 79.531475
+  type: 'test'
+  ...
+# Subtest: HP03: wrong MVP stage is not accepted
+ok 3 - HP03: wrong MVP stage is not accepted
+  ---
+  duration_ms: 75.732868
+  type: 'test'
+  ...
+# Subtest: HP04: changed byte fixture is not accepted
+ok 4 - HP04: changed byte fixture is not accepted
+  ---
+  duration_ms: 72.659134
+  type: 'test'
+  ...
+# Subtest: HP05: changed inherited source is not accepted
+ok 5 - HP05: changed inherited source is not accepted
+  ---
+  duration_ms: 67.228439
+  type: 'test'
+  ...
+# Subtest: HP06: missing license is not accepted
+ok 6 - HP06: missing license is not accepted
+  ---
+  duration_ms: 65.423207
+  type: 'test'
+  ...
+# Subtest: HP07: extra sealed tool is not accepted
+ok 7 - HP07: extra sealed tool is not accepted
+  ---
+  duration_ms: 74.821934
+  type: 'test'
+  ...
+# Subtest: HP08: product PASS fabricated before implementation is rejected
+ok 8 - HP08: product PASS fabricated before implementation is rejected
+  ---
+  duration_ms: 72.57017
+  type: 'test'
+  ...
+# Subtest: HP09: empty product test suite fails rather than passing
+ok 9 - HP09: empty product test suite fails rather than passing
+  ---
+  duration_ms: 31.116769
+  type: 'test'
+  ...
+# Subtest: HP10: workspace preparation is non-overwriting
+ok 10 - HP10: workspace preparation is non-overwriting
+  ---
+  duration_ms: 35.102134
+  type: 'test'
+  ...
+# Subtest: HP11: new project-owned pure module is allowed outside immutable baseline
+ok 11 - HP11: new project-owned pure module is allowed outside immutable baseline
+  ---
+  duration_ms: 324.023382
+  type: 'test'
+  ...
+# Subtest: HP12: shared core cannot import Node filesystem
+ok 12 - HP12: shared core cannot import Node filesystem
+  ---
+  duration_ms: 368.24581
+  type: 'test'
+  ...
+# Subtest: HP13: new package dependency requires incremental audit
+ok 13 - HP13: new package dependency requires incremental audit
+  ---
+  duration_ms: 48.009206
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1430.713506

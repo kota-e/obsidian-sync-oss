@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "method": "ZIP extracted into a separate directory; fresh npm cache; npm ci offline ignore-scripts; strict build; tests; gate",
+  "tests": 37,
+  "failedTests": 0,
+  "skippedTests": 0,
+  "gate": "PASS",
+  "approvedSetSha256": "19e2ff63173623ec012ecb5c5fd6710483875ea747e0ce8e42e772d0765828b3",
+  "node": "v22.16.0",
+  "npm": "10.9.2",
+  "platform": "Linux container",
+  "realR2Requests": 0,
+  "obsidianHostExecuted": false,
+  "realDeviceTestsExecuted": false,
+  "timestampDate": "2026-09-06"
+}

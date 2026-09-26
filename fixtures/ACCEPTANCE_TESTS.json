@@ -1,0 +1,2078 @@
+{
+  "format": "svsync-acceptance-catalog",
+  "version": "1.0",
+  "source_spec": "docs/obsidian_sync_oss_detailed_spec_v1.0_20260906.md",
+  "source_sha256": "569e9948bdb845d9c8efcf7ca9302e9d023b9da212809596743e02b71d3ce803",
+  "implemented": false,
+  "case_count": 84,
+  "mvp01_case_count": 67,
+  "cases": [
+    {
+      "id": "AT-01",
+      "condition": "L/R/Bが同じ",
+      "expected": "本文・headを書き換えない",
+      "stage": "0.1",
+      "source_line": 1789,
+      "suite": "planner",
+      "fixtures": [
+        "F-EQUAL"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "S0でL/R/Bを一致させてplan、承認、runを実行する。",
+      "assertions": "業務本文書込0、Remote PUT0、commit/revisionの新規発行0。状態NO_CHANGES。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-01.test.mjs",
+      "result_file": "reports/acceptance/AT-01.json"
+    },
+    {
+      "id": "AT-02",
+      "condition": "Lだけ変更",
+      "expected": "CASで公開。旧本文・旧manifestが残る",
+      "stage": "0.1",
+      "source_line": 1790,
+      "suite": "executor",
+      "fixtures": [
+        "F-LOCAL-EDIT"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "AからL=Bだけへ編集し、planを承認してheadをCAS更新する。",
+      "assertions": "RemoteはB、Aのblobと旧manifestを取得可能。baseline=B。無条件PUT0。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-02.test.mjs",
+      "result_file": "reports/acceptance/AT-02.json"
+    },
+    {
+      "id": "AT-03",
+      "condition": "Rだけ変更",
+      "expected": "復旧検証後にLocal更新。内容一致後にbaseline更新",
+      "stage": "0.1",
+      "source_line": 1791,
+      "suite": "executor",
+      "fixtures": [
+        "F-REMOTE-EDIT"
+      ],
+      "faults": [
+        "local.beforeApply"
+      ],
+      "steps": "R=B、L=Aの計画を作る。旧Aの保存・読戻し後に条件一致を確認してBを適用する。",
+      "assertions": "recovery=A、Local=B。RECOVERY_READYがLOCAL_APPLY_STARTEDより先。baseline更新に証拠あり。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-03.test.mjs",
+      "result_file": "reports/acceptance/AT-03.json"
+    },
+    {
+      "id": "AT-04",
+      "condition": "LとRが別内容へ変更",
+      "expected": "両本文を変えず競合停止",
+      "stage": "0.1",
+      "source_line": 1792,
+      "suite": "planner",
+      "fixtures": [
+        "F-DIVERGED"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "L=B、R=C、B基準=Aからplanを生成する。",
+      "assertions": "blockedPathsにn.md、本文/公開head/baseline不変。無関係ノートも転送しない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-04.test.mjs",
+      "result_file": "reports/acceptance/AT-04.json"
+    },
+    {
+      "id": "AT-05",
+      "condition": "双方が同内容へ変更、時計は逆転",
+      "expected": "時刻で競合にせず内容一致として扱う",
+      "stage": "0.1",
+      "source_line": 1793,
+      "suite": "planner",
+      "fixtures": [
+        "F-EQUAL-EDIT"
+      ],
+      "faults": [
+        "clock.skew"
+      ],
+      "steps": "L=R=B、基準=Aで両端末の時刻を前後へ逆転して計画する。",
+      "assertions": "CONFIRM_EQUALとなり、時刻による勝者なし。本文/Remote PUT0、共通版だけ証拠に基づき更新。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-05.test.mjs",
+      "result_file": "reports/acceptance/AT-05.json"
+    },
+    {
+      "id": "AT-06",
+      "condition": "空の新端末から既存Remoteへ接続",
+      "expected": "Downloadのみ。削除/空manifest上書きゼロ",
+      "stage": "0.1",
+      "source_line": 1794,
+      "suite": "bootstrap",
+      "fixtures": [
+        "F-EMPTY-JOIN"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "Aを持つRemoteへ、baselineもLocalも空の新しいclientで参加する。",
+      "assertions": "Downloadと新端末の記録だけ。Remote head不変、削除命令0。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-06.test.mjs",
+      "result_file": "reports/acceptance/AT-06.json"
+    },
+    {
+      "id": "AT-07",
+      "condition": "初回に同名・別内容がある",
+      "expected": "一括Local優先/Remote優先を行わない",
+      "stage": "0.1",
+      "source_line": 1795,
+      "suite": "bootstrap",
+      "fixtures": [
+        "F-NO-BASE-CONFLICT"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "baselineなし、同名のLocal=BとRemote=Aで参加ウィザードの比較まで進める。",
+      "assertions": "一括優先操作なし、E_CONFLICT、両内容不変。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-07.test.mjs",
+      "result_file": "reports/acceptance/AT-07.json"
+    },
+    {
+      "id": "AT-08",
+      "condition": "既存headを削除した状態で接続",
+      "expected": "新規初期化せず停止",
+      "stage": "0.1",
+      "source_line": 1796,
+      "suite": "bootstrap",
+      "fixtures": [
+        "F-EQUAL"
+      ],
+      "faults": [
+        "remote.head.missing"
+      ],
+      "steps": "既存identityとbaselineを保持してheadだけを欠損させ、同期する。",
+      "assertions": "E_REMOTE_HEAD_MISSING、新規世代0の作成なし、全PUT0。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-08.test.mjs",
+      "result_file": "reports/acceptance/AT-08.json"
+    },
+    {
+      "id": "AT-09",
+      "condition": "403、通信切断、必要なGETの失敗",
+      "expected": "不在に変換しない。破壊的操作ゼロ",
+      "stage": "0.1",
+      "source_line": 1797,
+      "suite": "transport",
+      "fixtures": [
+        "F-REMOTE-EDIT"
+      ],
+      "faults": [
+        "remote.read.fail"
+      ],
+      "steps": "head、commit、manifest、必要blobの各GETに403・disconnect・timeoutを別々に注入する。",
+      "assertions": "型付き失敗。[]/nullの正常応答に置換しない。通常書込0。再試行分類一致。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-09.test.mjs",
+      "result_file": "reports/acceptance/AT-09.json"
+    },
+    {
+      "id": "AT-10",
+      "condition": "初期化時LISTの2ページ目でエラー",
+      "expected": "空判定しない。head作成なし",
+      "stage": "0.1",
+      "source_line": 1798,
+      "suite": "bootstrap",
+      "fixtures": [
+        "F-PAGED"
+      ],
+      "faults": [
+        "remote.list.page2.fail"
+      ],
+      "steps": "初期化確認のLISTを2ページに分け、1ページ目空/非空の双方で2ページ目を失敗させる。",
+      "assertions": "完全一覧を返さず初期化停止。head PUT0。成功した1ページ目だけで空判定しない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-10.test.mjs",
+      "result_file": "reports/acceptance/AT-10.json"
+    },
+    {
+      "id": "AT-11",
+      "condition": "baselineのあるLocalファイルだけ不在",
+      "expected": "自動削除も自動復活もせず保留",
+      "stage": "0.1",
+      "source_line": 1799,
+      "suite": "planner",
+      "fixtures": [
+        "F-LOCAL-ABSENT"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "baseline=A、Remote=A、Localだけ不在として同期する。",
+      "assertions": "不在候補としてBLOCKED。Remote削除0、Local再作成0、baselineを捨てない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-11.test.mjs",
+      "result_file": "reports/acceptance/AT-11.json"
+    },
+    {
+      "id": "AT-12",
+      "condition": "二端末が別ファイルを同時公開",
+      "expected": "片方は再計画し、最終manifestに両変更がある",
+      "stage": "0.1",
+      "source_line": 1800,
+      "suite": "protocol",
+      "fixtures": [
+        "F-TWO-PATHS"
+      ],
+      "faults": [
+        "remote.cas.race"
+      ],
+      "steps": "client Pはa.mdをBへ、Qはb.mdをCへ。双方H0読後、P公開、Qのstale CASを実行。Qは新計画を再承認する。",
+      "assertions": "Qは412後に再計画し、最終manifestはa=B,b=C。旧H0の強制上書き0。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-12.test.mjs",
+      "result_file": "reports/acceptance/AT-12.json"
+    },
+    {
+      "id": "AT-13",
+      "condition": "二端末が同じファイルを別内容で同時公開",
+      "expected": "後続の無条件上書きをせず競合へ",
+      "stage": "0.1",
+      "source_line": 1801,
+      "suite": "protocol",
+      "fixtures": [
+        "F-DIVERGED"
+      ],
+      "faults": [
+        "remote.cas.race"
+      ],
+      "steps": "PとQが同じn.mdを別内容へ更新。片方のCAS成功後にもう片方を実行する。",
+      "assertions": "後続は再読込後E_CONFLICT。先行内容と後続Localの双方が残る。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-13.test.mjs",
+      "result_file": "reports/acceptance/AT-13.json"
+    },
+    {
+      "id": "AT-14",
+      "condition": "head PUTは成功、応答だけ失われる",
+      "expected": "commitの採用を照合し、重複・失敗扱いを避ける",
+      "stage": "0.1",
+      "source_line": 1802,
+      "suite": "restart",
+      "fixtures": [
+        "F-LOCAL-EDIT"
+      ],
+      "faults": [
+        "remote.head.afterCommit.beforeResponse"
+      ],
+      "steps": "headの更新はRemoteへ反映させ、応答のみ失わせてプロセスを作り直す。",
+      "assertions": "祖先またはtipで同じcommitを証明。二重revisionや別操作を作らない。照合前Local更新0。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-14.test.mjs",
+      "result_file": "reports/acceptance/AT-14.json"
+    },
+    {
+      "id": "AT-15",
+      "condition": "未知の必須capabilityを受信",
+      "expected": "Local/Remote/baselineの変更なし",
+      "stage": "0.1",
+      "source_line": 1803,
+      "suite": "schema",
+      "fixtures": [
+        "F-FUTURE-CAPABILITY"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "未知capabilityを持つhead/manifestを正常ハッシュで用意する。",
+      "assertions": "E_FORMAT_UNSUPPORTED、Local/Remote/baseline不変。診断以外の転送なし。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-15.test.mjs",
+      "result_file": "reports/acceptance/AT-15.json"
+    },
+    {
+      "id": "AT-16",
+      "condition": "復旧用コピーの書き込み/読み戻し失敗",
+      "expected": "対象ノートの更新・退避ゼロ",
+      "stage": "0.1",
+      "source_line": 1804,
+      "suite": "recovery",
+      "fixtures": [
+        "F-REMOTE-EDIT"
+      ],
+      "faults": [
+        "recovery.write.fail",
+        "recovery.verify.fail"
+      ],
+      "steps": "復旧本文書込失敗と読戻しhash不一致を独立に注入する。",
+      "assertions": "E_RECOVERY_WRITE。対象更新0、先行するRemote公開も0。失敗を復旧済みにしない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-16.test.mjs",
+      "result_file": "reports/acceptance/AT-16.json"
+    },
+    {
+      "id": "AT-17",
+      "condition": "Local更新直後、checkpoint前に終了",
+      "expected": "再起動後に内容照合し、盲目的に再上書きしない",
+      "stage": "0.1",
+      "source_line": 1805,
+      "suite": "restart",
+      "fixtures": [
+        "F-REMOTE-EDIT"
+      ],
+      "faults": [
+        "local.afterApply.beforeReceipt"
+      ],
+      "steps": "LocalをBへ更新した直後に終了し、receipt/checkpointなしで再起動する。",
+      "assertions": "現物Bを検証して補完証拠を作るか停止。Aで上書きしない。新しい変更には触らない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-17.test.mjs",
+      "result_file": "reports/acceptance/AT-17.json"
+    },
+    {
+      "id": "AT-18",
+      "condition": "blobまたはmanifestの1バイトを変更",
+      "expected": "ハッシュ不一致として停止",
+      "stage": "0.1",
+      "source_line": 1806,
+      "suite": "schema",
+      "fixtures": [
+        "F-TAMPER"
+      ],
+      "faults": [
+        "remote.read.corrupt"
+      ],
+      "steps": "blobとmanifestそれぞれ1バイト改変する。参照hashは改変前のまま。",
+      "assertions": "E_CHECKSUMまたは先行schema拒否。head公開とLocal書込0。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-18.test.mjs",
+      "result_file": "reports/acceptance/AT-18.json"
+    },
+    {
+      "id": "AT-19",
+      "condition": "正常な0バイトMarkdown",
+      "expected": "不在扱いせず同期できる",
+      "stage": "0.1",
+      "source_line": 1807,
+      "suite": "bytes",
+      "fixtures": [
+        "F-BYTES"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "empty.binの0バイトを新規Upload/Downloadとして往復する。",
+      "assertions": "0バイトのLIVEとして保持。不在ではない。0長Rangeは作らない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-19.test.mjs",
+      "result_file": "reports/acceptance/AT-19.json"
+    },
+    {
+      "id": "AT-20",
+      "condition": "`../`、絶対パス、別ケース名、Unicode衝突",
+      "expected": "Vault外書き込み・既存別ファイル上書きゼロ",
+      "stage": "0.1",
+      "source_line": 1808,
+      "suite": "paths",
+      "fixtures": [
+        "F-PATHS"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "危険パス・予約名・別ケース・NFC/NFKC衝突を独立入力する。",
+      "assertions": "E_PATH_UNSAFE/E_PATH_COLLISION、Vault外操作0、既存内容不変、自動改名0。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-20.test.mjs",
+      "result_file": "reports/acceptance/AT-20.json"
+    },
+    {
+      "id": "AT-21",
+      "condition": "`.obsidian`と変更されたconfigDirをRemoteから指定",
+      "expected": "同期対象から保護し書き込まない",
+      "stage": "0.1",
+      "source_line": 1809,
+      "suite": "paths",
+      "fixtures": [
+        "F-PATHS"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "configDir=.privatecfgとして、.obsidianと実configDir以下へのRemote参照を投入する。",
+      "assertions": "両領域へ書込0。保護対象を不在/削除候補にしない。エラー/対象外の表示あり。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-21.test.mjs",
+      "result_file": "reports/acceptance/AT-21.json"
+    },
+    {
+      "id": "AT-22",
+      "condition": "checkpoint片方/両方を破損",
+      "expected": "古い正常版だけで書き込まず、journal/ClientStoreの証拠で補完または停止",
+      "stage": "0.1",
+      "source_line": 1810,
+      "suite": "recovery",
+      "fixtures": [
+        "F-CHECKPOINT"
+      ],
+      "faults": [
+        "checkpoint.corrupt"
+      ],
+      "steps": "新しい片方だけ、両方、checksum不一致を独立試験する。",
+      "assertions": "journal/ClientStoreで補完証明できる場合のみ回復。それ以外は停止、空baselineを作らない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-22.test.mjs",
+      "result_file": "reports/acceptance/AT-22.json"
+    },
+    {
+      "id": "AT-23",
+      "condition": "tombstone到着前にLocalを編集",
+      "expected": "内容を保持し削除対編集の競合",
+      "stage": "0.3",
+      "source_line": 1811,
+      "suite": "delete",
+      "fixtures": [
+        "F-DELETED"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "削除前AのbaselineがあるLocalをBへ編集してからtombstoneを読む。",
+      "assertions": "DT-02、元Local=Bを保持し競合。退避/削除/自動復活なし。",
+      "required_for_mvp_01": false,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-23.test.mjs",
+      "result_file": "reports/acceptance/AT-23.json"
+    },
+    {
+      "id": "AT-24",
+      "condition": "大量削除の境界値を投入",
+      "expected": "D/Nの定義どおり追加承認を要求",
+      "stage": "0.3",
+      "source_line": 1812,
+      "suite": "delete",
+      "fixtures": [
+        "F-DELETE-COUNTS"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "N,Dの全境界対を判定する。0/0、不正整数、D>Nも含める。",
+      "assertions": "通常承認必須。massDelete/allDeleteは仕様式と一致し追加承認。入力不正を0に丸めない。",
+      "required_for_mvp_01": false,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-24.test.mjs",
+      "result_file": "reports/acceptance/AT-24.json"
+    },
+    {
+      "id": "AT-25",
+      "condition": "大きな削除計画を内部で分割",
+      "expected": "元の操作集合でガードし回避できない",
+      "stage": "0.3",
+      "source_line": 1813,
+      "suite": "delete",
+      "fixtures": [
+        "F-DELETE-COUNTS"
+      ],
+      "faults": [
+        "plan.partition"
+      ],
+      "steps": "大きな一ユーザー操作を下位batchへ分けて実行しようとする。",
+      "assertions": "元plan全体のD/Nで停止。小batch化で承認を迂回しない。",
+      "required_for_mvp_01": false,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-25.test.mjs",
+      "result_file": "reports/acceptance/AT-25.json"
+    },
+    {
+      "id": "AT-26",
+      "condition": "長期オフライン端末に古いファイルが残る",
+      "expected": "tombstoneを保持し、無断復活しない",
+      "stage": "0.3",
+      "source_line": 1814,
+      "suite": "delete",
+      "fixtures": [
+        "F-DELETED"
+      ],
+      "faults": [
+        "client.offline"
+      ],
+      "steps": "古いAを持つ端末を長期オフラインとし、その間のtombstoneを保持して再参加させる。",
+      "assertions": "削除履歴が残り、Aを無断Uploadしない。必要な履歴確認または競合停止。",
+      "required_for_mvp_01": false,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-26.test.mjs",
+      "result_file": "reports/acceptance/AT-26.json"
+    },
+    {
+      "id": "AT-27",
+      "condition": "接続先bucket/prefix/epochを変更",
+      "expected": "旧baselineを使わず再接続へ",
+      "stage": "0.1",
+      "source_line": 1815,
+      "suite": "bootstrap",
+      "fixtures": [
+        "F-EQUAL"
+      ],
+      "faults": [
+        "connection.change"
+      ],
+      "steps": "bucket/prefix/epochを一つずつ変更して設定保存し、旧planで実行を試す。",
+      "assertions": "旧baselineを新Remoteへ流用しない。E_APPROVAL_STALE/再接続が必要。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-27.test.mjs",
+      "result_file": "reports/acceptance/AT-27.json"
+    },
+    {
+      "id": "AT-28",
+      "condition": "同じ競合解消処理を繰り返す",
+      "expected": "同内容のコピーを再利用し増殖しない",
+      "stage": "0.2",
+      "source_line": 1816,
+      "suite": "conflict",
+      "fixtures": [
+        "F-CONFLICT-COPY"
+      ],
+      "faults": [
+        "executor.replay"
+      ],
+      "steps": "同じL/R/Bの解消計画を実行し、再起動後に同じ処理を要求する。",
+      "assertions": "同内容同名コピーを再利用し、毎回新コピーを増やさない。証拠を確認。",
+      "required_for_mvp_01": false,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-28.test.mjs",
+      "result_file": "reports/acceptance/AT-28.json"
+    },
+    {
+      "id": "AT-29",
+      "condition": "競合コピーの保存先に別内容がある",
+      "expected": "既存を残して別名保存",
+      "stage": "0.2",
+      "source_line": 1817,
+      "suite": "conflict",
+      "fixtures": [
+        "F-CONFLICT-COPY"
+      ],
+      "faults": [
+        "path.occupied"
+      ],
+      "steps": "予定保存先へ無関係なCを置いてから競合解消を計画/実行する。",
+      "assertions": "Cは不変。計画前は別名、承認後に発見したら再計画・再承認。",
+      "required_for_mvp_01": false,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-29.test.mjs",
+      "result_file": "reports/acceptance/AT-29.json"
+    },
+    {
+      "id": "AT-30",
+      "condition": "Vault.process直前にLocalを書き換える",
+      "expected": "期待内容と不一致を検知して中止",
+      "stage": "0.1",
+      "source_line": 1818,
+      "suite": "local",
+      "fixtures": [
+        "F-REMOTE-EDIT"
+      ],
+      "faults": [
+        "local.beforeApply"
+      ],
+      "steps": "復旧A作成後、process callbackの直前にLocal=Cへ変更する。",
+      "assertions": "E_LOCAL_CHANGED、Cを保持しBで上書きしない。復旧Aは残す。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-30.test.mjs",
+      "result_file": "reports/acceptance/AT-30.json"
+    },
+    {
+      "id": "AT-31",
+      "condition": "通常同期のAPI呼び出しを監視",
+      "expected": "物理削除APIが呼ばれない",
+      "stage": "0.1〜0.3",
+      "source_line": 1819,
+      "suite": "boundary",
+      "fixtures": [
+        "F-EQUAL"
+      ],
+      "faults": [
+        "all.operations"
+      ],
+      "steps": "全対象段階の全同期ケースでLocal/Remote操作トレースを収集する。",
+      "assertions": "Remote物理DELETEと通常Vault永久削除0。0.1ではtombstone・退避の実行経路も0。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-31.test.mjs",
+      "result_file": "reports/acceptance/AT-31.json"
+    },
+    {
+      "id": "AT-32",
+      "condition": "iPhoneで必要API・依存ライブラリが使えない",
+      "expected": "書き込みゲートを閉じる。PCエミュレーションのみで合格にしない",
+      "stage": "0.1",
+      "source_line": 1820,
+      "suite": "platform",
+      "fixtures": [
+        "F-API-CAPS"
+      ],
+      "faults": [
+        "capability.missing"
+      ],
+      "steps": "必要なWeb/API能力を一つずつ未対応にし、実iPhone記録と突き合わせる。",
+      "assertions": "能力未成立ならwriteGate=false。PC模擬のみの結果をiPhone合格にしない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-32.test.mjs",
+      "result_file": "reports/acceptance/AT-32.json"
+    },
+    {
+      "id": "AT-33",
+      "condition": "未検証のバイナリ上書き経路を実行",
+      "expected": "元パスを変えずコピー/保留へ",
+      "stage": "0.2",
+      "source_line": 1821,
+      "suite": "attachment",
+      "fixtures": [
+        "F-BINARY"
+      ],
+      "faults": [
+        "local.binaryReplace.unsupported"
+      ],
+      "steps": "既存バイナリの置換能力をfalseとして別内容の添付を同期要求する。",
+      "assertions": "元パス不変。確認済み別名保存か保留。0.1では対象外。",
+      "required_for_mvp_01": false,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-33.test.mjs",
+      "result_file": "reports/acceptance/AT-33.json"
+    },
+    {
+      "id": "AT-34",
+      "condition": "API数・保存量・ローカル容量の上限へ到達",
+      "expected": "新操作を停止し、確定済み状態を記録",
+      "stage": "0.1",
+      "source_line": 1822,
+      "suite": "limits",
+      "fixtures": [
+        "F-LIMITS"
+      ],
+      "faults": [
+        "budget.exhausted"
+      ],
+      "steps": "API回数/Remote保存量/Local管理上限に境界値を与える。",
+      "assertions": "新通常操作停止、確認済み証拠を最終化。復旧物を空けるために削除しない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-34.test.mjs",
+      "result_file": "reports/acceptance/AT-34.json"
+    },
+    {
+      "id": "AT-35",
+      "condition": "端末時計を進める/戻す",
+      "expected": "mtimeでデータを捨てない",
+      "stage": "0.1",
+      "source_line": 1823,
+      "suite": "planner",
+      "fixtures": [
+        "F-DIVERGED"
+      ],
+      "faults": [
+        "clock.skew"
+      ],
+      "steps": "同じ本文状態に対してmtimeとwall clockを正負方向に変更する。",
+      "assertions": "L/R/Bの判定は不変。署名時刻誤差エラーを内容の新旧へ流用しない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-35.test.mjs",
+      "result_file": "reports/acceptance/AT-35.json"
+    },
+    {
+      "id": "AT-36",
+      "condition": "iPhone中断後、旧通信が遅れて完了",
+      "expected": "古いコールバックからLocal/baselineを変更しない",
+      "stage": "0.1",
+      "source_line": 1824,
+      "suite": "restart",
+      "fixtures": [
+        "F-LOCAL-EDIT"
+      ],
+      "faults": [
+        "run.cancel.beforeLateResponse"
+      ],
+      "steps": "PUTを保留しrunを中断、generationを進めた後に旧応答を解放する。",
+      "assertions": "旧callbackのLocal/baseline書込0。Remoteの採用可能性はpending照合へ残す。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-36.test.mjs",
+      "result_file": "reports/acceptance/AT-36.json"
+    },
+    {
+      "id": "AT-37",
+      "condition": "journalの破損・連番欠落",
+      "expected": "自動再開せず要確認",
+      "stage": "0.1",
+      "source_line": 1825,
+      "suite": "recovery",
+      "fixtures": [
+        "F-JOURNAL"
+      ],
+      "faults": [
+        "journal.corrupt"
+      ],
+      "steps": "中間/末尾の連番欠落、previous hash不一致、同sequence異内容を投入する。",
+      "assertions": "E_JOURNAL_INVALID、自動再開/空履歴化0。診断を保存。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-37.test.mjs",
+      "result_file": "reports/acceptance/AT-37.json"
+    },
+    {
+      "id": "AT-38",
+      "condition": "複数blobの途中でPUT/検証を失敗",
+      "expected": "未完成manifestをheadから公開しない",
+      "stage": "0.1",
+      "source_line": 1826,
+      "suite": "protocol",
+      "fixtures": [
+        "F-TWO-PATHS"
+      ],
+      "faults": [
+        "remote.blob2.fail"
+      ],
+      "steps": "複数Upload中の2つ目のPUT/検証GETを失敗させる。",
+      "assertions": "未完成一覧をhead公開しない。保存済み不変blobは残り勝手に削除しない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-38.test.mjs",
+      "result_file": "reports/acceptance/AT-38.json"
+    },
+    {
+      "id": "AT-39",
+      "condition": "Content-Lengthと実データ長が違う",
+      "expected": "解析・適用を拒否",
+      "stage": "0.1",
+      "source_line": 1827,
+      "suite": "transport",
+      "fixtures": [
+        "F-RESPONSES"
+      ],
+      "faults": [
+        "response.length.mismatch"
+      ],
+      "steps": "HEAD/GET/Rangeで宣言長より短い/長い本文を返す。",
+      "assertions": "E_RESPONSE_LIMIT、JSON解析やLocal適用へ渡さない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-39.test.mjs",
+      "result_file": "reports/acceptance/AT-39.json"
+    },
+    {
+      "id": "AT-40",
+      "condition": "観測済みより古いheadを取得",
+      "expected": "履歴異常として書き込み停止",
+      "stage": "0.1",
+      "source_line": 1828,
+      "suite": "protocol",
+      "fixtures": [
+        "F-HISTORY"
+      ],
+      "faults": [
+        "remote.history.rollback"
+      ],
+      "steps": "観測アンカーより古いgenerationのheadを返す。",
+      "assertions": "E_REMOTE_HISTORY_CHANGED。旧状態へLocalを戻さず書込0。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-40.test.mjs",
+      "result_file": "reports/acceptance/AT-40.json"
+    },
+    {
+      "id": "AT-41",
+      "condition": "受信対象ノートがエディタで開いている",
+      "expected": "更新を延期し、閉じた後も再照合する",
+      "stage": "0.1",
+      "source_line": 1829,
+      "suite": "local",
+      "fixtures": [
+        "F-REMOTE-EDIT"
+      ],
+      "faults": [
+        "local.editor.open"
+      ],
+      "steps": "受信対象を開いたタブを残す。閉じるまで延期し、閉じた後にさらにLocal=Cへ変更する。",
+      "assertions": "開いている間は適用0。閉じた後も再比較し古いB更新を盲実行しない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-41.test.mjs",
+      "result_file": "reports/acceptance/AT-41.json"
+    },
+    {
+      "id": "AT-42",
+      "condition": "manifestとblobからテストVaultをエクスポート",
+      "expected": "通常ファイルとして元バイト列を再現できる",
+      "stage": "0.1",
+      "source_line": 1830,
+      "suite": "export",
+      "fixtures": [
+        "F-TWO-PATHS"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "固定manifest/blobから新しい空テスト出力へエクスポートする。",
+      "assertions": "相対パスと元bytes一致。metadataを通常ノートへ混ぜない。Remote書込0。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-42.test.mjs",
+      "result_file": "reports/acceptance/AT-42.json"
+    },
+    {
+      "id": "AT-43",
+      "condition": "ローカル退避の直前/直後に別編集が入る",
+      "expected": "新内容も残し、補償復元/要確認へ",
+      "stage": "0.3",
+      "source_line": 1831,
+      "suite": "delete",
+      "fixtures": [
+        "F-DELETED"
+      ],
+      "faults": [
+        "local.beforeMove",
+        "local.afterMove"
+      ],
+      "steps": "退避の直前と直後の二つの試験に分け、別内容Bを元パスまたは退避先に発生させて再照合する。",
+      "assertions": "新内容も保持。非上書き補償復元またはDELETE_EDIT_RACEで停止。",
+      "required_for_mvp_01": false,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-43.test.mjs",
+      "result_file": "reports/acceptance/AT-43.json"
+    },
+    {
+      "id": "AT-44",
+      "condition": "同じprefixを二端末が同時初期化",
+      "expected": "headは条件付きで一方だけ採用。強制上書きなし",
+      "stage": "0.1",
+      "source_line": 1832,
+      "suite": "bootstrap",
+      "fixtures": [
+        "F-EMPTY-REMOTE"
+      ],
+      "faults": [
+        "remote.initialization.race"
+      ],
+      "steps": "同一prefixを2端末が空と観測し、同時にgeneration0を公開する。",
+      "assertions": "If-None-Matchでheadは一方のみ採用。412側は再読込、無条件上書き0。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-44.test.mjs",
+      "result_file": "reports/acceptance/AT-44.json"
+    },
+    {
+      "id": "AT-45",
+      "condition": "別端末へstateを含むVaultをコピー",
+      "expected": "ClientStoreマーカー不一致で停止。物理端末完全識別とは表示しない",
+      "stage": "0.1",
+      "source_line": 1833,
+      "suite": "identity",
+      "fixtures": [
+        "F-CLONED"
+      ],
+      "faults": [
+        "client.clone"
+      ],
+      "steps": "stateを含むVaultだけを別clientへコピー。ClientStoreは別のまま。",
+      "assertions": "E_CLIENT_IDENTITY。旧pendingを再生しない。完全な端末複製検出は保証しない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-45.test.mjs",
+      "result_file": "reports/acceptance/AT-45.json"
+    },
+    {
+      "id": "AT-46",
+      "condition": "429に長いRetry-Afterを設定",
+      "expected": "短縮して再送せず、予算超過なら延期",
+      "stage": "0.1",
+      "source_line": 1834,
+      "suite": "retry",
+      "fixtures": [
+        "F-RESPONSES"
+      ],
+      "faults": [
+        "response.retryAfter"
+      ],
+      "steps": "429に秒形式/HTTP-date形式のRetry-Afterを与える。残run予算を超える値も含める。",
+      "assertions": "待機を短縮しない。上限超過なら延期、同じ要求の無限再送なし。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-46.test.mjs",
+      "result_file": "reports/acceptance/AT-46.json"
+    },
+    {
+      "id": "AT-47",
+      "condition": "保存したJSONに重複キー・過大ネストがある",
+      "expected": "正規形式/スキーマ検査で拒否",
+      "stage": "0.1",
+      "source_line": 1835,
+      "suite": "schema",
+      "fixtures": [
+        "F-JSON"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "duplicate-keys.jsonとtoo-deep.json、未知キー、非正規JSONを受信する。",
+      "assertions": "正規形式/実行時schemaを拒否。過大ネストを危険な再帰処理へ渡さない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-47.test.mjs",
+      "result_file": "reports/acceptance/AT-47.json"
+    },
+    {
+      "id": "AT-48",
+      "condition": "不変オブジェクトの同じキーに別内容がある",
+      "expected": "412後に検査し、無条件上書きしない",
+      "stage": "0.1",
+      "source_line": 1836,
+      "suite": "protocol",
+      "fixtures": [
+        "F-TAMPER"
+      ],
+      "faults": [
+        "remote.immutable.occupied"
+      ],
+      "steps": "不変keyが別内容で既存のためPUTが412になる。",
+      "assertions": "GETで照合し不一致停止。既存bytesを置換しない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-48.test.mjs",
+      "result_file": "reports/acceptance/AT-48.json"
+    },
+    {
+      "id": "AT-49",
+      "condition": "Upload Bの応答待ちにLocalをCへ編集",
+      "expected": "Bの公開証拠でbaseline=B、Local=Cを保持してdirty",
+      "stage": "0.1",
+      "source_line": 1837,
+      "suite": "restart",
+      "fixtures": [
+        "F-LOCAL-EDIT"
+      ],
+      "faults": [
+        "remote.head.beforeResponse"
+      ],
+      "steps": "Local=Bを固定送信し、応答待ちにLocal=Cへ追記してから成功を返す。",
+      "assertions": "baselineは公開B、Local=Cのままdirty。baseline=AのままにもLocal=B戻しにもならない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-49.test.mjs",
+      "result_file": "reports/acceptance/AT-49.json"
+    },
+    {
+      "id": "AT-50",
+      "condition": "自分のcommit公開後、他端末がさらに更新",
+      "expected": "採用履歴を確認し旧Local計画を再生せず最新で再計画",
+      "stage": "0.1",
+      "source_line": 1838,
+      "suite": "restart",
+      "fixtures": [
+        "F-HISTORY"
+      ],
+      "faults": [
+        "remote.afterOwnCommit"
+      ],
+      "steps": "自分のcommit採用直後に別端末が次commitを公開してから処理を再開する。",
+      "assertions": "自分の証拠は確定。旧Local操作は再生せず最新headで再計画・再承認。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-50.test.mjs",
+      "result_file": "reports/acceptance/AT-50.json"
+    },
+    {
+      "id": "AT-51",
+      "condition": "Download適用レシート後にLocalを追加編集",
+      "expected": "適用版の共通履歴を保持し、追加入力を上書きしない",
+      "stage": "0.1",
+      "source_line": 1839,
+      "suite": "restart",
+      "fixtures": [
+        "F-REMOTE-EDIT"
+      ],
+      "faults": [
+        "local.afterReceipt"
+      ],
+      "steps": "B適用の永続receipt後、Local=Cへ編集する。",
+      "assertions": "共通履歴Bを証明しCを保持。現在内容不一致だけでB適用履歴を否定しない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-51.test.mjs",
+      "result_file": "reports/acceptance/AT-51.json"
+    },
+    {
+      "id": "AT-52",
+      "condition": "Download途中終了、レシートなし、Localは第三の版",
+      "expected": "成功を推測せず第三の版を保全して要確認",
+      "stage": "0.1",
+      "source_line": 1840,
+      "suite": "restart",
+      "fixtures": [
+        "F-REMOTE-EDIT"
+      ],
+      "faults": [
+        "local.afterApply.beforeReceipt"
+      ],
+      "steps": "Local反映後receipt前で終了し、その後Local=Cとして再起動する。",
+      "assertions": "第三のCを保全、NEEDS_REVIEW。予定Bを書いたという証拠を捏造しない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-52.test.mjs",
+      "result_file": "reports/acceptance/AT-52.json"
+    },
+    {
+      "id": "AT-53",
+      "condition": "新checkpoint破損、古い正常版と新journalが残る",
+      "expected": "履歴を補完するか停止。古いbaseline単独で更新しない",
+      "stage": "0.1",
+      "source_line": 1841,
+      "suite": "recovery",
+      "fixtures": [
+        "F-CHECKPOINT"
+      ],
+      "faults": [
+        "checkpoint.newest.corrupt"
+      ],
+      "steps": "古い正常checkpoint、新journal、ClientStore下限を残し新checkpointだけ破損させる。",
+      "assertions": "新履歴を補完して整合確認できるか停止。古いbaselineだけで続行しない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-53.test.mjs",
+      "result_file": "reports/acceptance/AT-53.json"
+    },
+    {
+      "id": "AT-54",
+      "condition": "journal末尾欠落、ClientStoreの発行番号は先に進む",
+      "expected": "連番欠落を検出し停止。欠落を成功扱いしない",
+      "stage": "0.1",
+      "source_line": 1842,
+      "suite": "recovery",
+      "fixtures": [
+        "F-JOURNAL"
+      ],
+      "faults": [
+        "journal.reserved.notPersisted"
+      ],
+      "steps": "ClientStore予約sequence=nを保存し、journalのnだけない状態で再起動する。",
+      "assertions": "欠番を停止条件にする。実施済み/未実施を推測して穴埋めしない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-54.test.mjs",
+      "result_file": "reports/acceptance/AT-54.json"
+    },
+    {
+      "id": "AT-55",
+      "condition": "同じcheckpoint sequenceで異なる内容がある",
+      "expected": "分岐として停止。片方を都合よく選ばない",
+      "stage": "0.1",
+      "source_line": 1843,
+      "suite": "recovery",
+      "fixtures": [
+        "F-CHECKPOINT"
+      ],
+      "faults": [
+        "checkpoint.sameSequence.branch"
+      ],
+      "steps": "同sequenceで異なるchecksum-valid payloadのcheckpoint-a/bを用意する。",
+      "assertions": "分岐を拒否。日時や任意のa優先で選ばない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-55.test.mjs",
+      "result_file": "reports/acceptance/AT-55.json"
+    },
+    {
+      "id": "AT-56",
+      "condition": "高いgenerationだが観測headの子孫でない",
+      "expected": "E_REMOTE_HISTORY_CHANGEDで書き込みゼロ",
+      "stage": "0.1",
+      "source_line": 1844,
+      "suite": "protocol",
+      "fixtures": [
+        "F-HISTORY"
+      ],
+      "faults": [
+        "remote.history.fork"
+      ],
+      "steps": "アンカーより高いgenerationだが別の親鎖のheadを返す。",
+      "assertions": "E_REMOTE_HISTORY_CHANGED、Local/Remote通常書込0。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-56.test.mjs",
+      "result_file": "reports/acceptance/AT-56.json"
+    },
+    {
+      "id": "AT-57",
+      "condition": "129世代以上の間隔で端末が復帰",
+      "expected": "128ずつ読取検証を継続でき、検証中は書き込まない",
+      "stage": "0.1",
+      "source_line": 1845,
+      "suite": "protocol",
+      "fixtures": [
+        "F-HISTORY"
+      ],
+      "faults": [
+        "history.budget"
+      ],
+      "steps": "129、256、4096、4097世代の親鎖を決定的factoryで用意する。",
+      "assertions": "128ごとの読取継続と総上限停止を検証。未完了中は書込0、アンカーを勝手にリセットしない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-57.test.mjs",
+      "result_file": "reports/acceptance/AT-57.json"
+    },
+    {
+      "id": "AT-58",
+      "condition": "parent chainの循環・世代飛び・親ハッシュ不一致",
+      "expected": "履歴不正として停止",
+      "stage": "0.1",
+      "source_line": 1846,
+      "suite": "schema",
+      "fixtures": [
+        "F-HISTORY"
+      ],
+      "faults": [
+        "history.invalidParent"
+      ],
+      "steps": "循環、generation飛び、親hash不一致を各別入力する。",
+      "assertions": "予算内で拒否し無限走査なし。E_REMOTE_HISTORY_CHANGED等の原因を保持。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-58.test.mjs",
+      "result_file": "reports/acceptance/AT-58.json"
+    },
+    {
+      "id": "AT-59",
+      "condition": "同じpathにlive/tombstone重複または親revision不正",
+      "expected": "schema/整合検査で拒否",
+      "stage": "0.3",
+      "source_line": 1847,
+      "suite": "delete",
+      "fixtures": [
+        "F-DELETED"
+      ],
+      "faults": [
+        "metadata.duplicate"
+      ],
+      "steps": "同pathのLive/Deleted重複、parent/deletedFromの不整合を作る。",
+      "assertions": "0.3の整合規則で拒否。0.1はcapabilityで先に拒否。",
+      "required_for_mvp_01": false,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-59.test.mjs",
+      "result_file": "reports/acceptance/AT-59.json"
+    },
+    {
+      "id": "AT-60",
+      "condition": "deleted baseline、同じtombstone、Local不在",
+      "expected": "DT-07で変更なし。Live版の表へ落とさない",
+      "stage": "0.3",
+      "source_line": 1848,
+      "suite": "delete",
+      "fixtures": [
+        "F-DELETED"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "B=deleted(d)、R=同d、Local不在のDT-07を実行する。",
+      "assertions": "NO_CHANGES、Live比較へ誤分岐なし、通常ノート作成0。",
+      "required_for_mvp_01": false,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-60.test.mjs",
+      "result_file": "reports/acceptance/AT-60.json"
+    },
+    {
+      "id": "AT-61",
+      "condition": "削除後に正規復元、Local不在または同内容",
+      "expected": "DT-09/10どおり履歴を検証し取り込み/一致確認",
+      "stage": "0.3",
+      "source_line": 1849,
+      "suite": "delete",
+      "fixtures": [
+        "F-DELETED"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "dから正当に復元したxを含む履歴で、Local不在/同xのDT-09/10を実行する。",
+      "assertions": "親revisionを検証してDownload候補または一致確認。削除履歴は保持。",
+      "required_for_mvp_01": false,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-61.test.mjs",
+      "result_file": "reports/acceptance/AT-61.json"
+    },
+    {
+      "id": "AT-62",
+      "condition": "削除後に正規復元、Localに別の編集",
+      "expected": "DT-11で競合。両本文を保持",
+      "stage": "0.3",
+      "source_line": 1850,
+      "suite": "delete",
+      "fixtures": [
+        "F-DELETED"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "復元xに対しLocal=y、xとyは不同としてDT-11を実行する。",
+      "assertions": "競合停止、両方のbytes保持。最新時刻で勝者を決めない。",
+      "required_for_mvp_01": false,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-62.test.mjs",
+      "result_file": "reports/acceptance/AT-62.json"
+    },
+    {
+      "id": "AT-63",
+      "condition": "Remoteで更新後に削除、端末baselineは更新前",
+      "expected": "DT-04で要確認。未確認の削除前版と誤同一視しない",
+      "stage": "0.3",
+      "source_line": 1851,
+      "suite": "delete",
+      "fixtures": [
+        "F-DELETED"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "端末B=A、RemoteはA→B更新→削除としてDT-04を実行する。",
+      "assertions": "E_DELETE_HISTORY。削除前Bを端末確認済みAと誤同一視しない。",
+      "required_for_mvp_01": false,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-63.test.mjs",
+      "result_file": "reports/acceptance/AT-63.json"
+    },
+    {
+      "id": "AT-64",
+      "condition": "元パスへ復元する",
+      "expected": "現行はLive、旧manifestのtombstoneと本文は残る",
+      "stage": "0.3",
+      "source_line": 1852,
+      "suite": "delete",
+      "fixtures": [
+        "F-DELETED"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "元pathのtombstone dを明示復元してLive xへ公開する。",
+      "assertions": "新revisionのparent/restoredFrom=d、現行はLive、過去manifestのdと旧blob不変。",
+      "required_for_mvp_01": false,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-64.test.mjs",
+      "result_file": "reports/acceptance/AT-64.json"
+    },
+    {
+      "id": "AT-65",
+      "condition": "Docs/a.mdとdocs/b.md、a.mdとa.md/b.md",
+      "expected": "親成分/型衝突を検出し自動改名・上書きなし",
+      "stage": "0.1",
+      "source_line": 1853,
+      "suite": "paths",
+      "fixtures": [
+        "F-PATHS"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "親名別ケース・ファイル対フォルダ衝突を全path集合として検証する。",
+      "assertions": "Docs/aとdocs/b、a.mdとa.md/bを拒否。末尾名のみの検査では合格しない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-65.test.mjs",
+      "result_file": "reports/acceptance/AT-65.json"
+    },
+    {
+      "id": "AT-66",
+      "condition": "既存の.svsync-stateにユーザーファイルがある",
+      "expected": "ownership不明として初期化しない",
+      "stage": "0.1",
+      "source_line": 1854,
+      "suite": "local",
+      "fixtures": [
+        "F-UNKNOWN-INTERNAL"
+      ],
+      "faults": [
+        "local.internal.occupied"
+      ],
+      "steps": ".svsync-state/.svsync-recoveryに所有者不明ファイルを先に置いて起動する。",
+      "assertions": "E_STATE_NAMESPACE、初期化/所有者markerの押付け/上書き0。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-66.test.mjs",
+      "result_file": "reports/acceptance/AT-66.json"
+    },
+    {
+      "id": "AT-67",
+      "condition": "UTF-8 BOM、CRLF、非BMP、0バイトを保存",
+      "expected": "元バイト列を再現、非対応APIなら元を変更せず停止",
+      "stage": "0.1",
+      "source_line": 1855,
+      "suite": "bytes",
+      "fixtures": [
+        "F-BYTES"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "BOM、CRLF、非BMP、combining文字、0長をread→stage→process→readの経路で往復する。",
+      "assertions": "完全なbytes一致。エンコード不能ならE_UNSUPPORTED_ENCODINGで元を変えない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-67.test.mjs",
+      "result_file": "reports/acceptance/AT-67.json"
+    },
+    {
+      "id": "AT-68",
+      "condition": "head候補が受信サイズ上限を超える",
+      "expected": "本文無制限受信前に拒否するかHandlerを不合格にする",
+      "stage": "0.1",
+      "source_line": 1856,
+      "suite": "transport",
+      "fixtures": [
+        "F-RESPONSES"
+      ],
+      "faults": [
+        "response.oversized"
+      ],
+      "steps": "headのHEAD長が上限超、length不明、実GETが巨大の各応答を模擬する。",
+      "assertions": "受信前拒否またはbounded readerで停止。全量buffer後の拒否だけは合格不可。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-68.test.mjs",
+      "result_file": "reports/acceptance/AT-68.json"
+    },
+    {
+      "id": "AT-69",
+      "condition": "Range途中でETagが変わる・Rangeを無視した応答",
+      "expected": "不完全データを採用せず再読込/停止",
+      "stage": "0.1",
+      "source_line": 1857,
+      "suite": "transport",
+      "fixtures": [
+        "F-RESPONSES"
+      ],
+      "faults": [
+        "response.range.changed"
+      ],
+      "steps": "Range 2個目をETag変更、HTTP200でRange無視、412にそれぞれする。",
+      "assertions": "混ぜて結合しない。mutable headは再読込、不変物は異常停止。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-69.test.mjs",
+      "result_file": "reports/acceptance/AT-69.json"
+    },
+    {
+      "id": "AT-70",
+      "condition": "圧縮Content-Encodingや不正なContent-Range",
+      "expected": "黙って展開/結合せずE_RESPONSE_LIMIT",
+      "stage": "0.1",
+      "source_line": 1858,
+      "suite": "transport",
+      "fixtures": [
+        "F-RESPONSES"
+      ],
+      "faults": [
+        "response.encoding.invalid"
+      ],
+      "steps": "gzip等の変換、ずれたContent-Range、合計長不一致を返す。",
+      "assertions": "E_RESPONSE_LIMIT。暗黙展開、補正、切捨てで続行しない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-70.test.mjs",
+      "result_file": "reports/acceptance/AT-70.json"
+    },
+    {
+      "id": "AT-71",
+      "condition": "任意URL・偽R2サフィックス・port・リダイレクト",
+      "expected": "資格情報を外部へ転送せず送信拒否",
+      "stage": "0.1",
+      "source_line": 1859,
+      "suite": "transport",
+      "fixtures": [
+        "F-DESTINATIONS"
+      ],
+      "faults": [
+        "response.redirect"
+      ],
+      "steps": "偽サフィックス/任意port/資格情報URLを入力し、別hostへの3xxも制御した偽secretで試す。",
+      "assertions": "送信前URL拒否、redirect追従0。実secretで第三者転送試験をしない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-71.test.mjs",
+      "result_file": "reports/acceptance/AT-71.json"
+    },
+    {
+      "id": "AT-72",
+      "condition": "同一headへの連続送信で429となる",
+      "expected": "端末内の最低間隔とRetry-Afterを守り、412と区別",
+      "stage": "0.1",
+      "source_line": 1860,
+      "suite": "retry",
+      "fixtures": [
+        "F-RESPONSES"
+      ],
+      "faults": [
+        "response.rateLimit"
+      ],
+      "steps": "偽時計でhead初期化直後/再送を発火し、429を注入する。",
+      "assertions": "同端末の開始間隔1000ms以上。Retry-After遵守、412のCAS競合と別分類。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-72.test.mjs",
+      "result_file": "reports/acceptance/AT-72.json"
+    },
+    {
+      "id": "AT-73",
+      "condition": "期限削除/IA移行の兆候がある",
+      "expected": "E_REMOTE_POLICY、設定確認。ヘッダー不在だけで安全扱いしない",
+      "stage": "0.1",
+      "source_line": 1861,
+      "suite": "transport",
+      "fixtures": [
+        "F-POLICY"
+      ],
+      "faults": [
+        "response.policy"
+      ],
+      "steps": "期限切れ予定/IA移行の兆候を返し、ヘッダーなしの場合も試す。",
+      "assertions": "兆候時E_REMOTE_POLICY。なしは自動安全証明にせず初回利用者確認を要求。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-73.test.mjs",
+      "result_file": "reports/acceptance/AT-73.json"
+    },
+    {
+      "id": "AT-74",
+      "condition": "Remoteの旧本文blobが欠損した状態で更新公開",
+      "expected": "旧版復旧を保証できないため公開を拒否",
+      "stage": "0.1",
+      "source_line": 1862,
+      "suite": "protocol",
+      "fixtures": [
+        "F-LOCAL-EDIT"
+      ],
+      "faults": [
+        "remote.oldBlob.missing"
+      ],
+      "steps": "更新先の旧A blobを消して新Bだけ利用可能にする。",
+      "assertions": "旧内容保全を証明できず公開拒否。新B検証だけでは合格しない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-74.test.mjs",
+      "result_file": "reports/acceptance/AT-74.json"
+    },
+    {
+      "id": "AT-75",
+      "condition": "head送信後に通常API予算を使い切る",
+      "expected": "別枠の読取照合とローカル最終化、未解決なら要確認",
+      "stage": "0.1",
+      "source_line": 1863,
+      "suite": "limits",
+      "fixtures": [
+        "F-LOCAL-EDIT"
+      ],
+      "faults": [
+        "budget.afterHeadSend"
+      ],
+      "steps": "head送信直後に通常run API予算を使い切らせる。",
+      "assertions": "新通常転送0。別枠GET照合＋Local記録のみ。残照合も超えれば要確認。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-75.test.mjs",
+      "result_file": "reports/acceptance/AT-75.json"
+    },
+    {
+      "id": "AT-76",
+      "condition": "state/staging/journalが管理上限に達する",
+      "expected": "自動削除せず新計画停止。最終化領域を確保",
+      "stage": "0.1",
+      "source_line": 1864,
+      "suite": "limits",
+      "fixtures": [
+        "F-LIMITS"
+      ],
+      "faults": [
+        "state.reserve.low"
+      ],
+      "steps": "state/journal/staging合計と64MiB余裕の境界を投入する。",
+      "assertions": "余裕を消費するplanは開始しない。最終化は試行、勝手な清掃0。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-76.test.mjs",
+      "result_file": "reports/acceptance/AT-76.json"
+    },
+    {
+      "id": "AT-77",
+      "condition": "承認後に競合コピー先や下位操作を変更する",
+      "expected": "digest不一致で再承認。旧承認の使い回しなし",
+      "stage": "0.2",
+      "source_line": 1865,
+      "suite": "conflict",
+      "fixtures": [
+        "F-CONFLICT-COPY"
+      ],
+      "faults": [
+        "approval.planChanged"
+      ],
+      "steps": "承認後の下位操作・保存先・revisionを変更して旧digestの実行を要求する。",
+      "assertions": "E_APPROVAL_STALE、旧承認を使わない。新planで再承認。",
+      "required_for_mvp_01": false,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-77.test.mjs",
+      "result_file": "reports/acceptance/AT-77.json"
+    },
+    {
+      "id": "AT-78",
+      "condition": "staging後にLocalが変わる",
+      "expected": "同operationIdで別本文を送らず固定版と追加入力を分離",
+      "stage": "0.1",
+      "source_line": 1866,
+      "suite": "executor",
+      "fixtures": [
+        "F-LOCAL-EDIT"
+      ],
+      "faults": [
+        "source.afterFreeze"
+      ],
+      "steps": "staging検証後に元LocalをCへ変更し、PUT再試行を発生させる。",
+      "assertions": "同operationIdの送信bodyは常にB。Cを保持。stagingの読戻し不正なら停止。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-78.test.mjs",
+      "result_file": "reports/acceptance/AT-78.json"
+    },
+    {
+      "id": "AT-79",
+      "condition": "管理操作でrequiredCapabilitiesを取り除こうとする",
+      "expected": "親の必須集合を減らす通常更新を拒否",
+      "stage": "0.2〜0.3",
+      "source_line": 1867,
+      "suite": "schema",
+      "fixtures": [
+        "F-FUTURE-CAPABILITY"
+      ],
+      "faults": [
+        "metadata.capabilityReduced"
+      ],
+      "steps": "親にあるcapabilityを子で除き、新headへ公開を要求する。",
+      "assertions": "通常更新で集合減少を拒否。0.1のunknown拒否試験も別途継続。",
+      "required_for_mvp_01": false,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-79.test.mjs",
+      "result_file": "reports/acceptance/AT-79.json"
+    },
+    {
+      "id": "AT-80",
+      "condition": "ClientStoreを消去/複製、API利用不能",
+      "expected": "再参加/ゲート停止。架空の端末IDで続行しない",
+      "stage": "0.1",
+      "source_line": 1868,
+      "suite": "identity",
+      "fixtures": [
+        "F-CLONED"
+      ],
+      "faults": [
+        "client.marker.missing"
+      ],
+      "steps": "ClientStore消失、別contextへの複製、読取/保存例外を独立に投入する。",
+      "assertions": "E_CLIENT_IDENTITY、架空OS IDや再生成して続行なし。物理端末保証を表示しない。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-80.test.mjs",
+      "result_file": "reports/acceptance/AT-80.json"
+    },
+    {
+      "id": "AT-81",
+      "condition": "Remote読み取り専用エクスポートを実行",
+      "expected": "元Local/Remoteを書換えず空の出力先に元バイト列を再現",
+      "stage": "0.1",
+      "source_line": 1869,
+      "suite": "export",
+      "fixtures": [
+        "F-TWO-PATHS"
+      ],
+      "faults": [
+        "export.remoteAdvances"
+      ],
+      "steps": "空出力先へのreadonly export中にheadを進める。非空/元Vault出力先も試す。",
+      "assertions": "最初のcommitだけで一貫出力。非空/元Vaultは拒否。元Local/Remote/baseline書込0。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-81.test.mjs",
+      "result_file": "reports/acceptance/AT-81.json"
+    },
+    {
+      "id": "AT-82",
+      "condition": "Dry Runを繰り返す",
+      "expected": "対象本文、Remote、probeを書き込まない",
+      "stage": "0.1",
+      "source_line": 1870,
+      "suite": "executor",
+      "fixtures": [
+        "F-EQUAL",
+        "F-LOCAL-EDIT"
+      ],
+      "faults": [
+        "none"
+      ],
+      "steps": "Dry Runを複数回行い、操作トレースを比較する。",
+      "assertions": "本文、Remote、probe、source staging、recovery本文書込0。許可するのは計画/診断記録だけ。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-82.test.mjs",
+      "result_file": "reports/acceptance/AT-82.json"
+    },
+    {
+      "id": "AT-83",
+      "condition": "接続先変更中に旧runのPUT応答が到着",
+      "expected": "旧接続のpendingへ隔離。新接続でLocalやbaselineを更新しない",
+      "stage": "0.1",
+      "source_line": 1871,
+      "suite": "restart",
+      "fixtures": [
+        "F-LOCAL-EDIT"
+      ],
+      "faults": [
+        "connection.change.beforeLateResponse"
+      ],
+      "steps": "旧run PUTを保留したまま接続変更し、旧応答を解放する。",
+      "assertions": "旧pendingを隔離し新connectionにLocal/baseline反映0。旧結果は旧contextでのみ照合。",
+      "required_for_mvp_01": true,
+      "levels": [
+        "model",
+        "windows",
+        "iphone",
+        "real-r2/windows",
+        "real-r2/iphone"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-83.test.mjs",
+      "result_file": "reports/acceptance/AT-83.json"
+    },
+    {
+      "id": "AT-84",
+      "condition": "hidden領域への移動APIが衝突時に上書きする",
+      "expected": "G-DELETE不合格。無条件APIへフォールバックしない",
+      "stage": "0.3",
+      "source_line": 1872,
+      "suite": "delete",
+      "fixtures": [
+        "F-DELETED"
+      ],
+      "faults": [
+        "local.move.overwrite"
+      ],
+      "steps": "hidden領域へのmoveが既存退避先を上書きするAdapterを投入し実機契約と比較する。",
+      "assertions": "G-DELETE=FAIL。無条件renameを代替採用しない。0.1に実行経路を追加しない。",
+      "required_for_mvp_01": false,
+      "levels": [
+        "model"
+      ],
+      "status": "NOT_RUN",
+      "test_file": "tests/acceptance/AT-84.test.mjs",
+      "result_file": "reports/acceptance/AT-84.json"
+    }
+  ]
+}

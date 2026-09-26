@@ -1,0 +1,49 @@
+{
+  "format": "svsync-acceptance-result",
+  "stage": "0.1",
+  "sourceSpecSha256": "569e9948bdb845d9c8efcf7ca9302e9d023b9da212809596743e02b71d3ce803",
+  "implementationCommit": "63ea4338f53184b7f12453524c365c9a06504a4e",
+  "lockfileSha256": "4ed0cb3d4453c3f22ae19d667409461360193ba67eaf36d7d7c3fd5f78cdcd69",
+  "commands": [
+    "npm run test:product",
+    "npm test"
+  ],
+  "environment": {
+    "node": "v24.15.0",
+    "os": "win32",
+    "obsidian": null,
+    "device": "local Windows model runner"
+  },
+  "executedOn": "2026-09-24",
+  "runId": "pre-wp05-model-20260924-01",
+  "id": "AT-04",
+  "status": "NOT_RUN",
+  "fixtures": [
+    "F-DIVERGED",
+    "A.bin",
+    "B.bin",
+    "C.bin"
+  ],
+  "injectedFaults": [],
+  "levels": [
+    {
+      "level": "model",
+      "status": "PARTIAL",
+      "evidence": "Planner blocks n.md and emits zero operations; Executor run is unavailable before WP-05."
+    }
+  ],
+  "assertions": [
+    "L=B/R=C/Baseline=A",
+    "blockedPaths=[n.md]",
+    "operations=0",
+    "head and immutable object set unchanged",
+    "Local bytes and baseline hashes unchanged"
+  ],
+  "beforeAfterEvidence": {
+    "local": "n.md=B, other.md=A -> unchanged",
+    "remote": "head bytes/ETag and object key set unchanged; PUT counters 0",
+    "baseline": "A for both paths -> unchanged",
+    "journal": "not entered; Executor not implemented"
+  },
+  "notes": "The full AT requires an approved run. Keep overall NOT_RUN until WP-05 executes the blocked plan through the same Executor."
+}

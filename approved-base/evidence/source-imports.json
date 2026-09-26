@@ -1,0 +1,105 @@
+{
+  "sourceImports": [
+    {
+      "id": "IMP-001",
+      "kind": "exact-function-excerpt",
+      "repository": "remotely-save/remotely-save",
+      "commit": "08027677267934d3a1ca6f6e3cf06ee1be53ee52",
+      "sourcePath": "src/misc.ts",
+      "sourceBlobSha1": "046693e846d3c9799833a9624291aa6a5c99fc25",
+      "lines": [
+        117,
+        121
+      ],
+      "symbol": "copyArrayBuffer",
+      "license": "Apache-2.0",
+      "directImports": [],
+      "excerptFile": "evidence/upstream/remotely-save-copyArrayBuffer.lines117-121.txt",
+      "destination": "src/inherited/buffer-range.ts",
+      "sourceBytesSha256": "dc5a1eb798535f05f651e7b5a64965175b0b2ecaafd18e674b35f19ea649a168",
+      "destinationSha256": "421751db68a7243a4c4c1d2e44fce4b58f0807fc5dda8df3bc44347f0aac8462",
+      "status": "approved-for-listed-checkpoint-only"
+    },
+    {
+      "id": "IMP-002",
+      "kind": "exact-function-excerpt",
+      "repository": "remotely-save/remotely-save",
+      "commit": "08027677267934d3a1ca6f6e3cf06ee1be53ee52",
+      "sourcePath": "src/misc.ts",
+      "sourceBlobSha1": "046693e846d3c9799833a9624291aa6a5c99fc25",
+      "lines": [
+        281,
+        307
+      ],
+      "symbol": "SplitRange + getSplitRanges",
+      "license": "Apache-2.0",
+      "directImports": [],
+      "excerptFile": "evidence/upstream/remotely-save-getSplitRanges.lines281-307.txt",
+      "destination": "src/inherited/buffer-range.ts",
+      "sourceBytesSha256": "62c5e129aafa639c17fc061807cecca03eb3ed0ff4ea2c4051562a426dd9ef26",
+      "destinationSha256": "421751db68a7243a4c4c1d2e44fce4b58f0807fc5dda8df3bc44347f0aac8462",
+      "status": "approved-for-listed-checkpoint-only"
+    },
+    {
+      "id": "IMP-003",
+      "kind": "signer-only-derivative",
+      "repository": "mhart/aws4fetch",
+      "commit": "629b108747e066d1b93e8b72a4adbf2a4220db3b",
+      "sourcePath": "dist/aws4fetch.esm.mjs",
+      "sourceBlobSha1": "9c27de4db12fae710956c03888f95a4242073735",
+      "sourceFile": "evidence/upstream/aws4fetch.esm.mjs",
+      "sourceReview": "full file; original Git blob independently recomputed",
+      "license": "MIT",
+      "directImports": [],
+      "destination": "evidence/derived/aws4fetch-signer/index.mjs",
+      "change": "Remove AwsClient class and export only; keep signer/helpers; prepend explicit modification notice",
+      "sourceBytesSha256": "3049cd99d00a2fb83ce0e77f0e6b3fb22c17d8e708b740821f906145a8f978e9",
+      "destinationSha256": "8707c999823419c483fd6da731a1051fba1c5edb6a0903915810b81bd140fa30",
+      "status": "approved-for-listed-checkpoint-only"
+    }
+  ],
+  "packages": [
+    {
+      "name": "@svsync/aws4fetch-signer",
+      "version": "1.0.20-svsync.1",
+      "scope": "runtime",
+      "archive": "vendor/packages/aws4fetch-signer-1.0.20-svsync.1.tgz",
+      "archiveSha256": "977c6babbc560f65479d37133de37d917847f6015cb8a30a6ea25fb692042193",
+      "integrity": "sha512-IlGfzTdDC2Mj65LPbkrwnrQfFklqG9uE+hN7fE+3XkVP0rlVqFlgubjNy4hOKS4pREedMwg3w3a8l4hSV3mNYw==",
+      "inventoryFile": "evidence/aws4fetch-signer-1.0.20-svsync.1.inventory.json",
+      "fileCount": 5,
+      "archiveBytes": 7653,
+      "unpackedBytes": 21037,
+      "runtimeDependencies": [],
+      "optionalDependencies": [],
+      "peerDependencies": []
+    },
+    {
+      "name": "typescript",
+      "version": "5.8.3",
+      "scope": "development",
+      "archive": "vendor/packages/typescript-5.8.3-local-snapshot.tgz",
+      "archiveSha256": "6ed8b05aaef9597e5718015d3745c2ae945dd6aa2db4869dbf38aa74d0d35f42",
+      "integrity": "sha512-mZMBhXHy1KlH4EhDPkIIgcI5xCgwq9a6sxRehMiDAdW4H86g/PPAYvW8xPY6vGAlSx4feQKAfuhsdzUAaCdeFQ==",
+      "inventoryFile": "evidence/typescript-5.8.3-local-snapshot.inventory.json",
+      "fileCount": 130,
+      "archiveBytes": 4245442,
+      "unpackedBytes": 22867703,
+      "runtimeDependencies": [],
+      "optionalDependencies": [],
+      "peerDependencies": []
+    }
+  ],
+  "sources": {
+    "A": "https://github.com/remotely-save/remotely-save/blob/08027677267934d3a1ca6f6e3cf06ee1be53ee52/src/misc.ts",
+    "AL": "https://github.com/remotely-save/remotely-save/blob/08027677267934d3a1ca6f6e3cf06ee1be53ee52/LICENSE",
+    "W": "https://github.com/mhart/aws4fetch/blob/629b108747e066d1b93e8b72a4adbf2a4220db3b/dist/aws4fetch.esm.mjs",
+    "WP": "https://github.com/mhart/aws4fetch/blob/629b108747e066d1b93e8b72a4adbf2a4220db3b/package.json",
+    "WL": "https://github.com/mhart/aws4fetch/blob/629b108747e066d1b93e8b72a4adbf2a4220db3b/LICENSE",
+    "T": "https://registry.npmjs.org/typescript/5.8.3",
+    "TL": "https://github.com/microsoft/TypeScript/blob/68cead182cc24afdc3f1ce7c8ff5853aba14b65a/LICENSE.txt",
+    "TN": "https://github.com/microsoft/TypeScript/blob/68cead182cc24afdc3f1ce7c8ff5853aba14b65a/ThirdPartyNoticeText.txt",
+    "CF": "https://developers.cloudflare.com/r2/examples/aws/aws4fetch/",
+    "AP": "https://www.apache.org/licenses/LICENSE-2.0"
+  }
+}

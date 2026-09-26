@@ -1,0 +1,27 @@
+[
+  {
+    "path": "LICENSE",
+    "bytes": 1080,
+    "sha256": "a9455541e8a4e4766d146a7552ac547c04bfb7a8718f5af516f1b9e346e82a77"
+  },
+  {
+    "path": "LICENSE-LOCAL-TYPES.txt",
+    "bytes": 9197,
+    "sha256": "a7d00bfd54525bc694b6e32f64c7ebcf5e6b7ae3657be5cc12767bce74654a47"
+  },
+  {
+    "path": "index.d.mts",
+    "bytes": 676,
+    "sha256": "c0a428ff02b5dfe2e857e7f8975f5744664e8e7118766f36c27c85e68b460afc"
+  },
+  {
+    "path": "index.mjs",
+    "bytes": 9685,
+    "sha256": "8707c999823419c483fd6da731a1051fba1c5edb6a0903915810b81bd140fa30"
+  },
+  {
+    "path": "package.json",
+    "bytes": 399,
+    "sha256": "7f154692aacccf7dddc78649b4b0e0710d74813134053f3d239c4da519f43bcd"
+  }
+]

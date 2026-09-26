@@ -1,0 +1,8 @@
+**/node_modules/
+**/.build/
+reports-local/
+workspace/reports-local/
+**/.cache/
+.env
+.env.*
+*.secret

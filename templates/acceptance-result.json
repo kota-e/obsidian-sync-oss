@@ -1,0 +1,27 @@
+{
+  "format": "svsync-acceptance-result",
+  "id": "AT-01",
+  "stage": "0.1",
+  "status": "NOT_RUN",
+  "sourceSpecSha256": "569e9948bdb845d9c8efcf7ca9302e9d023b9da212809596743e02b71d3ce803",
+  "implementationCommit": null,
+  "lockfileSha256": null,
+  "fixtures": [],
+  "injectedFaults": [],
+  "commands": [],
+  "levels": [],
+  "assertions": [],
+  "beforeAfterEvidence": {
+    "local": null,
+    "remote": null,
+    "baseline": null,
+    "journal": null
+  },
+  "environment": {
+    "node": null,
+    "os": null,
+    "obsidian": null,
+    "device": null
+  },
+  "notes": "Fill only after actually running the specified checks. Redact secrets/content."
+}

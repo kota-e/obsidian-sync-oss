@@ -1,0 +1,51 @@
+{
+  "check": "handoff-preparation",
+  "status": "PASS",
+  "checks": [
+    {
+      "id": "H01_MANIFEST",
+      "status": "PASS"
+    },
+    {
+      "id": "H02_SEALED_FILE_HASHES",
+      "status": "PASS"
+    },
+    {
+      "id": "H03_APPROVED_BASE_UNCHANGED",
+      "status": "PASS"
+    },
+    {
+      "id": "H04_AT_SOURCE_MATCH",
+      "status": "PASS"
+    },
+    {
+      "id": "H05_AT_RECIPES_AND_STATUS",
+      "status": "PASS"
+    },
+    {
+      "id": "H06_FIXTURE_BYTES",
+      "status": "PASS"
+    },
+    {
+      "id": "H07_DOCS_AND_INSTRUCTIONS",
+      "status": "PASS"
+    },
+    {
+      "id": "H08_NEW_DOC_LOCAL_LINKS",
+      "status": "PASS"
+    },
+    {
+      "id": "H09_WORKSPACE_PLAN",
+      "status": "PASS"
+    },
+    {
+      "id": "H10_NO_PRODUCT_IMPLEMENTATION",
+      "status": "PASS"
+    },
+    {
+      "id": "H11_SEALED_TREE_MEMBERSHIP",
+      "status": "PASS"
+    }
+  ],
+  "productTestsExecuted": false
+}

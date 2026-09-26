@@ -1,0 +1,78 @@
+
+> @svsync/gbase-approved-inputs@0.0.1 gate
+> node scripts/verify-gate.mjs
+
+{
+  "gate": "G-BASE",
+  "status": "PASS",
+  "scope": "selected-imports-and-offline-module-scaffold",
+  "approvedSetSha256": "5aea72262a1f3cba353a17d178e93dfd864fb1d3492ba551795e4f9fd0226e6e",
+  "runtime": "v22.16.0",
+  "compiler": "5.8.3",
+  "checks": [
+    {
+      "id": "VG01_SCOPE",
+      "passed": true
+    },
+    {
+      "id": "VG02_APPROVED_FILE_HASHES",
+      "passed": true,
+      "detail": {
+        "files": 33
+      }
+    },
+    {
+      "id": "VG03_EXACT_EXECUTABLE_TREES",
+      "passed": true
+    },
+    {
+      "id": "VG04_UPSTREAM_BLOB_AND_EXCERPTS",
+      "passed": true,
+      "detail": {
+        "inheritedFunctionCount": 2
+      }
+    },
+    {
+      "id": "VG05_SIGNER_DERIVATION",
+      "passed": true
+    },
+    {
+      "id": "VG06_EXACT_DEPENDENCY_GRAPH",
+      "passed": true,
+      "detail": {
+        "directRuntime": 1,
+        "directDevelopment": 1,
+        "transitive": 0
+      }
+    },
+    {
+      "id": "VG07_TARBALL_INTEGRITY_AND_GRAPH",
+      "passed": true
+    },
+    {
+      "id": "VG08_INSTALLED_PACKAGES_MATCH",
+      "passed": true
+    },
+    {
+      "id": "VG09_RUNTIME_IMPORT_BOUNDARY",
+      "passed": true
+    },
+    {
+      "id": "VG10_LICENSE_AND_NOTICE",
+      "passed": true
+    },
+    {
+      "id": "VG11_COMPILED_TREE",
+      "passed": true,
+      "detail": {
+        "compiledFiles": 6
+      }
+    },
+    {
+      "id": "VG12_TOOLING_NO_INSTALL_SIDE_EFFECTS",
+      "passed": true
+    }
+  ],
+  "productionApproved": false,
+  "limitation": "Source/license/import checkpoint only. Not Obsidian, real R2, security or all future dependency approval."
+}

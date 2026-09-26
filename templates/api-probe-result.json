@@ -1,0 +1,25 @@
+{
+  "format": "svsync-api-probe-result",
+  "id": "P-R01",
+  "status": "NOT_RUN",
+  "authorization": {
+    "scope": "probe-only",
+    "approved": false,
+    "record": null
+  },
+  "environment": {
+    "os": null,
+    "obsidian": null,
+    "sdk": null,
+    "device": null,
+    "bundleSha256": null
+  },
+  "conditions": [],
+  "expected": [],
+  "actual": [],
+  "requests": 0,
+  "bytes": 0,
+  "residualObjects": [],
+  "evidence": [],
+  "notes": "Do not write secrets, authorization headers or private contents."
+}

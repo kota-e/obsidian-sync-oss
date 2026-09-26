@@ -1,0 +1,58 @@
+{
+  "format": "svsync-acceptance-result",
+  "stage": "0.1",
+  "sourceSpecSha256": "569e9948bdb845d9c8efcf7ca9302e9d023b9da212809596743e02b71d3ce803",
+  "implementationCommit": "63ea4338f53184b7f12453524c365c9a06504a4e",
+  "lockfileSha256": "4ed0cb3d4453c3f22ae19d667409461360193ba67eaf36d7d7c3fd5f78cdcd69",
+  "commands": [
+    "npm run test:product",
+    "npm test"
+  ],
+  "environment": {
+    "node": "v24.15.0",
+    "os": "win32",
+    "obsidian": null,
+    "device": "local Windows model runner"
+  },
+  "executedOn": "2026-09-24",
+  "runId": "pre-wp05-model-20260924-01",
+  "id": "AT-16",
+  "status": "NOT_RUN",
+  "fixtures": [
+    "F-REMOTE-EDIT",
+    "A.bin",
+    "B.bin"
+  ],
+  "injectedFaults": [
+    "recovery.write.fail",
+    "recovery.verify.fail"
+  ],
+  "levels": [
+    {
+      "level": "model",
+      "status": "PARTIAL",
+      "evidence": "Recovery adapter refuses failed write and corrupted readback; Executor ordering and Remote publication guard await WP-05."
+    },
+    {
+      "level": "windows",
+      "status": "NOT_RUN"
+    },
+    {
+      "level": "iphone",
+      "status": "NOT_RUN"
+    }
+  ],
+  "assertions": [
+    "E_RECOVERY_WRITE for both faults",
+    "Local A unchanged",
+    "no verified receipt",
+    "journal empty"
+  ],
+  "beforeAfterEvidence": {
+    "local": "n.md=A -> A",
+    "remote": "no Remote adapter is part of this WP-04 recovery call; publication count unverified",
+    "baseline": "not advanced",
+    "journal": "0 events -> 0 events"
+  },
+  "notes": "Cannot claim the full AT or model level until Executor proves no prior Remote publication and no Local apply."
+}

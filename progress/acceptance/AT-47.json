@@ -1,0 +1,54 @@
+{
+  "format": "svsync-acceptance-result",
+  "stage": "0.1",
+  "sourceSpecSha256": "569e9948bdb845d9c8efcf7ca9302e9d023b9da212809596743e02b71d3ce803",
+  "implementationCommit": "63ea4338f53184b7f12453524c365c9a06504a4e",
+  "lockfileSha256": "4ed0cb3d4453c3f22ae19d667409461360193ba67eaf36d7d7c3fd5f78cdcd69",
+  "commands": [
+    "npm run test:product",
+    "npm test"
+  ],
+  "environment": {
+    "node": "v24.15.0",
+    "os": "win32",
+    "obsidian": null,
+    "device": "local Windows model runner"
+  },
+  "executedOn": "2026-09-24",
+  "runId": "pre-wp05-model-20260924-01",
+  "id": "AT-47",
+  "status": "PASS",
+  "fixtures": [
+    "F-JSON",
+    "duplicate-keys.json",
+    "too-deep.json",
+    "noncanonical.json",
+    "single-surrogate.json"
+  ],
+  "injectedFaults": [
+    "duplicate JSON key",
+    "depth > 16",
+    "noncanonical encoding",
+    "unpaired surrogate",
+    "unknown head field"
+  ],
+  "levels": [
+    {
+      "level": "model",
+      "status": "PASS",
+      "evidence": "Persisted fixture bytes and schema variants rejected; valid control head accepted."
+    }
+  ],
+  "assertions": [
+    "all five malformed inputs rejected",
+    "valid head accepted",
+    "fixture bytes unchanged"
+  ],
+  "beforeAfterEvidence": {
+    "local": "no Local write path entered",
+    "remote": "no Remote write path entered",
+    "baseline": "not changed",
+    "journal": "not changed"
+  },
+  "notes": "All levels required by AT-47 are model."
+}

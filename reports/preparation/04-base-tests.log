@@ -1,0 +1,232 @@
+TAP version 13
+# Subtest: B01: complete unchanged approved set passes the actual gate
+ok 1 - B01: complete unchanged approved set passes the actual gate
+  ---
+  duration_ms: 525.439784
+  type: 'test'
+  ...
+# Subtest: B02: adding an unreviewed source file is rejected
+ok 2 - B02: adding an unreviewed source file is rejected
+  ---
+  duration_ms: 512.226497
+  type: 'test'
+  ...
+# Subtest: B03: changing an approved source is rejected
+ok 3 - B03: changing an approved source is rejected
+  ---
+  duration_ms: 503.181975
+  type: 'test'
+  ...
+# Subtest: B04: adding an unaudited direct dependency is rejected
+ok 4 - B04: adding an unaudited direct dependency is rejected
+  ---
+  duration_ms: 478.564282
+  type: 'test'
+  ...
+# Subtest: B05: a changed dependency archive is rejected
+ok 5 - B05: a changed dependency archive is rejected
+  ---
+  duration_ms: 390.485757
+  type: 'test'
+  ...
+# Subtest: B06: a missing third-party license is rejected
+ok 6 - B06: a missing third-party license is rejected
+  ---
+  duration_ms: 504.286215
+  type: 'test'
+  ...
+# Subtest: B07: introducing a Pro directory is rejected
+ok 7 - B07: introducing a Pro directory is rejected
+  ---
+  duration_ms: 529.23363
+  type: 'test'
+  ...
+# Subtest: P01: upstream signer bytes match GitHub Git blob SHA
+ok 8 - P01: upstream signer bytes match GitHub Git blob SHA
+  ---
+  duration_ms: 1.472539
+  type: 'test'
+  ...
+# Subtest: P02: copied utility function bodies match the reviewed excerpts
+ok 9 - P02: copied utility function bodies match the reviewed excerpts
+  ---
+  duration_ms: 0.260072
+  type: 'test'
+  ...
+# Subtest: P03: copy preserves all byte values
+ok 10 - P03: copy preserves all byte values
+  ---
+  duration_ms: 0.611892
+  type: 'test'
+  ...
+# Subtest: P04: copy has independent storage
+ok 11 - P04: copy has independent storage
+  ---
+  duration_ms: 0.135023
+  type: 'test'
+  ...
+# Subtest: P05: copy supports empty content
+ok 12 - P05: copy supports empty content
+  ---
+  duration_ms: 0.084718
+  type: 'test'
+  ...
+# Subtest: P06: empty input makes no invalid zero-byte Range
+ok 13 - P06: empty input makes no invalid zero-byte Range
+  ---
+  duration_ms: 0.114512
+  type: 'test'
+  ...
+# Subtest: P07: exact chunk boundaries
+ok 14 - P07: exact chunk boundaries
+  ---
+  duration_ms: 0.198048
+  type: 'test'
+  ...
+# Subtest: P08: partial final chunk
+ok 15 - P08: partial final chunk
+  ---
+  duration_ms: 0.259071
+  type: 'test'
+  ...
+# Subtest: P09: zero chunk size rejected before old utility is called
+ok 16 - P09: zero chunk size rejected before old utility is called
+  ---
+  duration_ms: 0.44443
+  type: 'test'
+  ...
+# Subtest: P10: negative/fractional/NaN/infinite totals rejected
+ok 17 - P10: negative/fractional/NaN/infinite totals rejected
+  ---
+  duration_ms: 0.366172
+  type: 'test'
+  ...
+# Subtest: P11: invalid chunk sizes rejected
+ok 18 - P11: invalid chunk sizes rejected
+  ---
+  duration_ms: 0.196826
+  type: 'test'
+  ...
+# Subtest: P12: array allocation bound respected
+ok 19 - P12: array allocation bound respected
+  ---
+  duration_ms: 0.090166
+  type: 'test'
+  ...
+# Subtest: P13: deterministic range coverage for 1000 inputs
+ok 20 - P13: deterministic range coverage for 1000 inputs
+  ---
+  duration_ms: 4.602497
+  type: 'test'
+  ...
+# Subtest: P14: derivative exposes signer only, not AwsClient
+ok 21 - P14: derivative exposes signer only, not AwsClient
+  ---
+  duration_ms: 0.140602
+  type: 'test'
+  ...
+# Subtest: P15: signer has no network-sending method
+ok 22 - P15: signer has no network-sending method
+  ---
+  duration_ms: 0.068784
+  type: 'test'
+  ...
+# Subtest: P16: derivative matches upstream for fixed GET/HEAD/PUT inputs
+ok 23 - P16: derivative matches upstream for fixed GET/HEAD/PUT inputs
+  ---
+  duration_ms: 34.081738
+  type: 'test'
+  ...
+# Subtest: P17: wrapper signs with explicit s3/auto and supplied content hash
+ok 24 - P17: wrapper signs with explicit s3/auto and supplied content hash
+  ---
+  duration_ms: 1.588664
+  type: 'test'
+  ...
+# Subtest: P18: create condition included in signed headers
+ok 25 - P18: create condition included in signed headers
+  ---
+  duration_ms: 3.140003
+  type: 'test'
+  ...
+# Subtest: P19: ETag quotes are preserved and signed
+ok 26 - P19: ETag quotes are preserved and signed
+  ---
+  duration_ms: 3.124089
+  type: 'test'
+  ...
+# Subtest: P20: unconditional PUT rejected
+ok 27 - P20: unconditional PUT rejected
+  ---
+  duration_ms: 0.252881
+  type: 'test'
+  ...
+# Subtest: P21: DELETE rejected at runtime
+ok 28 - P21: DELETE rejected at runtime
+  ---
+  duration_ms: 0.107171
+  type: 'test'
+  ...
+# Subtest: P22: arbitrary account host injection rejected
+ok 29 - P22: arbitrary account host injection rejected
+  ---
+  duration_ms: 0.090196
+  type: 'test'
+  ...
+# Subtest: P23: unsafe or unrelated object keys rejected
+ok 30 - P23: unsafe or unrelated object keys rejected
+  ---
+  duration_ms: 0.397369
+  type: 'test'
+  ...
+# Subtest: P24: both conditional headers cannot be supplied
+ok 31 - P24: both conditional headers cannot be supplied
+  ---
+  duration_ms: 0.141473
+  type: 'test'
+  ...
+# Subtest: P25: Range is preserved and signed
+ok 32 - P25: Range is preserved and signed
+  ---
+  duration_ms: 2.104552
+  type: 'test'
+  ...
+# Subtest: P26: source mutation during signing does not change frozen payload
+ok 33 - P26: source mutation during signing does not change frozen payload
+  ---
+  duration_ms: 1.173038
+  type: 'test'
+  ...
+# Subtest: P27: missing credentials rejected
+ok 34 - P27: missing credentials rejected
+  ---
+  duration_ms: 0.25937
+  type: 'test'
+  ...
+# Subtest: P28: GET body rejected
+ok 35 - P28: GET body rejected
+  ---
+  duration_ms: 0.110547
+  type: 'test'
+  ...
+# Subtest: P29: no API requests were sent
+ok 36 - P29: no API requests were sent
+  ---
+  duration_ms: 0.049404
+  type: 'test'
+  ...
+# Subtest: P30: changing caller configuration during signing cannot change the validated destination
+ok 37 - P30: changing caller configuration during signing cannot change the validated destination
+  ---
+  duration_ms: 4.969079
+  type: 'test'
+  ...
+1..37
+# tests 37
+# suites 0
+# pass 37
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3542.806235

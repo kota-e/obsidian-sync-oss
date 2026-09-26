@@ -1,0 +1,23 @@
+Independent Obsidian sync project — source-import checkpoint, 2026-09-06.
+
+Selected utility code is derived from Remotely Save, by fyears and contributors,
+commit 08027677267934d3a1ca6f6e3cf06ee1be53ee52, src/misc.ts.
+https://github.com/remotely-save/remotely-save
+The extracted functions are identified in docs/SOURCE_IMPORT_MANIFEST.md.
+Their Apache License 2.0 terms are included in LICENSE.
+This project is not an official continuation of Remotely Save or Obsidian Sync.
+
+The signer-only package is derived from aws4fetch 1.0.20 by Michael Hart,
+commit 629b108747e066d1b93e8b72a4adbf2a4220db3b.
+Its original MIT license and copyright notice are preserved.
+The transport class was removed; this is not an unmodified upstream release.
+
+Development-only compiler: TypeScript 5.8.3, Microsoft Corporation and
+contributors. The local snapshot retains LICENSE.txt and all original
+ThirdPartyNoticeText.txt, including DefinitelyTyped, Unicode, W3C/WHATWG DOM,
+Web Background Synchronization, and Khronos/WebGL notices.
+The compiler is a build tool, not a dependency to load in Obsidian.
+
+These notices do not grant trademark rights or imply endorsement.
+Original local adapters, declarations, and audit/test scripts are under
+Apache License 2.0. Third-party portions retain their respective licenses.
