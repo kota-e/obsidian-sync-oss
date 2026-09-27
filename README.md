@@ -1,5 +1,13 @@
 # ObsidianSyncOss
 
+WindowsとiPhoneでObsidianを使う課題から始まり、低コストでも安全性を犠牲にせず、長く蓄積したノートを守る同期OSSを目指します。\
+ノートは各端末のVaultに通常のMarkdownとして残し、クラウドは端末間同期の中継地点として扱います。\
+速度・便利さ・機能数より安全性を優先し、状態が分からないときは推測せずに停止します。\
+Remotely Saveの作者・Contributorとライセンスを尊重し、誰もが検証・改善できる公共的なOSSを目指します。
+
+理念の全文は [PROJECT_PHILOSOPHY.md](PROJECT_PHILOSOPHY.md) を参照してください。理念を公開文書・警告文・Release notesへ反映する手順は
+[PROJECT_COMMUNICATION_GUIDE.md](PROJECT_COMMUNICATION_GUIDE.md) に記載します。
+
 ObsidianSyncOss is an independent open source project for exploring safe,
 manual synchronization of Markdown notes between Windows/iPhone clients and a
 Cloudflare R2 backed remote. The design emphasizes content hashes, conditional

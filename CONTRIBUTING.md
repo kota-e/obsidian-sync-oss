@@ -4,6 +4,42 @@ Thank you for helping improve the project. It is an early source preview, so
 the safest contribution is a small, reviewable change with a clear test and a
 clear statement of what remains unverified.
 
+Read [PROJECT_PHILOSOPHY.md](PROJECT_PHILOSOPHY.md) for the project's purpose
+and values. It records project intent; the detailed specification, test plan,
+implementation decisions, and license audit remain the sources for concrete
+technical requirements and reuse permissions.
+
+For applying the philosophy to public descriptions, warnings, and release
+notes, see [PROJECT_COMMUNICATION_GUIDE.md](PROJECT_COMMUNICATION_GUIDE.md).
+
+## Project values and safety rules
+
+### Safety First
+
+- Never treat a communication or read failure as a file deletion.
+- When Local and Remote have both changed, do not silently choose one side.
+- Preserve the recovery information needed before overwriting or deleting data.
+- Do not automatically carry out large destructive changes.
+- Do not guess whether an operation with an unknown outcome succeeded or failed; reconcile it with evidence or stop.
+- Do not replay an old operation unchanged after restart; check current state and operation validity first.
+- Do not roll back a user's newer edit to accommodate synchronization.
+
+Do not weaken these rules to simplify implementation or make a test pass.
+
+### Attribution, source, and licenses
+
+- Describe this as an independent project influenced by Remotely Save. Keep the original author and contributor credits, source references, and required notices.
+- Use only code whose source and license have been reviewed and whose reuse is permitted. Do not use unauthorized Pro code.
+- Respect each confirmed license and preserve its notices. A license review for selected components does not grant permission to copy the rest of an upstream project.
+- Do not describe the project as an official successor or imply approval from the original author.
+- The project does not aim to convert paid features into unauthorized free features or to deny the value of Remotely Save. Public OSS may still affect another project's usage or sales, so do not promise that there will be no sales impact.
+
+### AI-assisted changes and conflicts
+
+Review AI-generated changes against the specification, code provenance, license conditions, tests, failure cases, regressions, and—when required—Windows and iPhone devices. Do not change expected test results in an unsafe direction to fit an implementation.
+
+If a principle conflicts with a technical requirement or a license condition, document the exact conflict, available choices, and safety impact, then report it for resolution. Do not silently choose an interpretation that weakens safety or expands reuse permissions.
+
 ## Before changing code
 
 Read these documents in order:

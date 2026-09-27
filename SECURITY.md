@@ -5,6 +5,28 @@ personal Vaults, production R2 buckets, or unattended synchronization. The
 absence of a reported issue does not mean that the current model or its
 future adapters have completed a security audit.
 
+## Safety principles for reports and fixes
+
+The project's values are recorded in
+[PROJECT_PHILOSOPHY.md](PROJECT_PHILOSOPHY.md). This policy does not replace
+the detailed protocol and test specifications. When a required state cannot be
+established, the project should stop and describe what remains unknown. A
+communication or listing failure must not be treated as evidence that a file
+was deleted.
+
+Security fixes and user guidance should preserve both sides of a conflict,
+retain recovery information before an overwrite or deletion, and check that a
+newer local edit will not be rolled back. An operation left uncertain by an
+interruption must be reconciled from current evidence rather than replayed as
+though it had never run. AI-generated code and text require human review,
+provenance and license checks, and relevant positive, negative, and failure-path
+tests. Test expectations must not be weakened to make an unsafe result pass.
+
+Stopping is a safety action, not proof that data is intact or that no data was
+lost. Reports and warnings must distinguish observed facts from unknown state.
+Do not promise complete safety or that data can never be lost. Report only
+bounded observations supported by evidence.
+
 ## What to report privately
 
 Please report issues privately when they could expose note contents,
