@@ -2,6 +2,10 @@
 
 The project's guiding principles are recorded in [PROJECT_PHILOSOPHY.md](PROJECT_PHILOSOPHY.md). This guide applies them to public descriptions, release notes, design decisions, user warnings, and contributor explanations. It is a writing and review aid; it does not change the detailed synchronization specification, test specification, or license audit.
 
+## Language for public documents
+
+Write public-facing project prose in plain English so readers from different backgrounds can review it. Maintainer discussions and private working records may be in Japanese. Keep retained Japanese historical specifications and audit baselines intact when they serve as verification records; English guides must identify those sources as Japanese and say when the guide is a summary rather than a full translation.
+
 ## Rules for every project statement
 
 - Describe a goal as a goal and a capability as implemented only when the code supports it. Separate intended behavior, implemented behavior, tested behavior, and supported behavior.
@@ -36,7 +40,7 @@ Do not turn an unknown into either a success or a failure. Stopping does not pro
 
 ### Warning example for an unknown remote write
 
-> **同期を一時停止しました。** リモートへの書き込み要求がタイムアウトしました。書き込みが反映されたかは確認できていません。状態を照合するまでは、同じ処理を再実行したり、対象データを上書き・削除したりしないでください。表示された記録と、現在の復旧手順に従って確認してください。停止したことだけでは、データが失われていないとは確認できません。
+> **Sync paused.** The request to write to the remote timed out. We could not confirm whether the write took effect. Until the state has been reconciled, do not retry the same operation or overwrite or delete the affected data. Check the available records and follow the recovery procedure for the current product version. Pausing does not confirm that no data was lost.
 
 Use this only when those facts match the actual event. Replace the action with the verified procedure for the current product version; do not imply that a reconciliation screen or recovery feature exists before it has been implemented and tested.
 

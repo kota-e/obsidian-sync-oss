@@ -1,38 +1,38 @@
-# プロジェクト理念の採用記録
+# Project Philosophy Adoption Record
 
-日付: 2026-09-27
+Date: 2026-09-27
 
-## 判断
+## Decision
 
-ユーザー提示の理念を `PROJECT_PHILOSOPHY.md` に保存し、今後のプロジェクト判断の上位原則として扱う。理念は目標と判断基準であり、実装済み機能や安全性の実証ではない。詳細仕様・テスト仕様・ライセンス監査結果を併読し、衝突があれば該当箇所、選択肢、安全性への影響を報告して決定を求める。独断で条件を弱めない。
+The philosophy provided by the user was recorded in PROJECT_PHILOSOPHY.md and is treated as a governing principle for future project decisions. The philosophy states goals and decision criteria; it does not prove that a feature has been implemented or that the system is safe. Read it alongside the detailed specification, test specification, and license audit. If they conflict, report the affected passages, options, and safety impact and request a decision. Do not weaken a requirement by making an independent interpretation.
 
-## 既存契約との照合
+## Cross-check against existing contracts
 
-| 理念 | 照合先 | 判断 |
+| Principle | Reference | Assessment |
 | --- | --- | --- |
-| 通信失敗を削除扱いしない、双方変更時に停止 | 詳細v1.0 §2.1 SI-001/003、§2.2 SG-006 | 整合 |
-| 復旧情報を残す、大量破壊操作を自動化しない | 詳細v1.0 §2.1 SI-004/006、§2.3 | 整合。MVP 0.1の削除伝播禁止を維持 |
-| 結果不明を推測しない、古い処理を再生しない、新しい編集を保護 | 詳細v1.0 §1.9、§2.2 SG-002/004、§2.3 | 整合 |
-| データ所有と通常Markdownの継続利用 | CODEX_IMPLEMENTATION_GUIDE WP-08、詳細v1.0 §3.7/付録H | 目標。取り出し機能の完成を主張しない |
-| 元作者への敬意、許可された再利用 | SOURCE_IMPORT_MANIFEST §2、DEPENDENCY_LICENSE_REVIEW §7 | 整合。限定2関数と第三者由来・個別条件を維持 |
-| AI生成物の検証と継続保守 | CODEX_IMPLEMENTATION_GUIDE §7/8、IMPLEMENTATION_DECISIONS ADR-H02/H10 | モデル試験と実機試験を区別 |
-| iCloudは要件を残し、R2方式を流用と仮定しない | ICLOUD_REQUIREMENTS §1/6/8 | 整合。実装延期を維持 |
+| Do not treat communication failure as deletion; stop when both sides changed | Detailed Specification v1.0, §2.1 SI-001/003 and §2.2 SG-006 | Consistent |
+| Preserve recovery information; do not automate large destructive changes | Detailed Specification v1.0, §2.1 SI-004/006 and §2.3 | Consistent. The MVP 0.1 prohibition on deletion propagation remains in force. |
+| Do not guess unknown outcomes, replay old operations, or roll back newer edits | Detailed Specification v1.0, §1.9, §2.2 SG-002/004, and §2.3 | Consistent |
+| User ownership and continued use of ordinary Markdown | CODEX_IMPLEMENTATION_GUIDE WP-08 and Detailed Specification v1.0 §3.7/Appendix H | A goal; export completion is not claimed. |
+| Respect upstream authors and use only permitted code | SOURCE_IMPORT_MANIFEST §2 and DEPENDENCY_LICENSE_REVIEW §7 | Consistent. Keep the two-function scope, third-party provenance, and individual license terms. |
+| Verify AI-generated work and support long-term maintenance | CODEX_IMPLEMENTATION_GUIDE §7/8 and IMPLEMENTATION_DECISIONS ADR-H02/H10 | Distinguish model tests from device tests. |
+| Retain iCloud requirements without assuming the R2 design applies | ICLOUD_REQUIREMENTS §1/6/8 | Consistent. iCloud implementation remains deferred. |
 
-上記の照合範囲で衝突は見つからなかった。全仕様・全実装の網羅監査や新しい製品試験を実施した意味ではない。
+No conflict was found within the passages compared above. This was not a comprehensive review of every specification and implementation, nor did it include new product testing.
 
-## 文書と公開の運用
+## Documentation and publication practice
 
-- README冒頭は理念要約、PROJECT_PHILOSOPHYは完全版、CONTRIBUTINGは参加者の具体的な規則。
-- SECURITYと申請下書きにも理念を反映する。申請下書きはローカルのみで、申請は未送信。
-- About、リリースノート、設計判断、利用者警告の表現は `PROJECT_COMMUNICATION_GUIDE.md` を参照する。
-- 元作者の売上を奪いたくない意図は「有料機能の無断無料化や、元プロジェクトの価値を否定することを目的としない」と表現する。利用状況や売上への影響ゼロを保証しない。
-- 固定された引渡し文書・AGENTS・監査hash・コード・試験の期待値は変更しない。現在の判断記録は本書に追加し、README/CONTRIBUTINGから新しい理念へ案内する。
-- 公開側にはレビューした文書だけをコピーし、独立した公開履歴へコミットする。非公開側の旧履歴をマージしない。
+- Put a concise philosophy summary at the start of the README, keep the full rationale in PROJECT_PHILOSOPHY.md, and give contributors concrete rules in CONTRIBUTING.md.
+- Reflect the philosophy in SECURITY.md and application drafts. Application drafts are local only and have not been submitted.
+- For About text, release notes, design decisions, and user warnings, follow PROJECT_COMMUNICATION_GUIDE.md.
+- Express the intent regarding the original author's revenue as: "The project does not aim to make paid features available for free without authorization or to deny the value of the original project." Do not promise zero effect on usage or revenue.
+- For this documentation-only change, fixed handoff documents, AGENTS, audit hashes, code, and test expectations remained unchanged. This record captures the decision, and the README and CONTRIBUTING.md point readers to the philosophy.
+- Publish only reviewed documents in the public repository, with an independent public history. Do not merge the private repository's previous history.
 
-## 検証範囲
+## Verification scope
 
-文書変更のみ。差分・リンク・原本整合性を確認し、製品試験やWindows/iPhone/R2/Vault実機試験の合格状態を更新しない。
+The recorded change was documentation-only. The record reports that the diff, links, and baseline integrity were checked; it did not update product-test results or claim successful Windows, iPhone, R2, or real-Vault testing.
 
-新規ガイドを当初 `docs/` に置いた際、H11が固定ディレクトリへの追加を検出した。新規ガイドはルートの `PROJECT_COMMUNICATION_GUIDE.md` に配置し、監査対象の集合や期待hashを変更しない。
+When a new guide was first placed under docs/, H11 detected an addition to a fixed directory. The guide was moved to the repository root as PROJECT_COMMUNICATION_GUIDE.md so that the audited set and expected hashes would not change.
 
-最終確認: `node tools/verify-handoff.mjs` は11/11 PASS、`git diff --check` は成功。更新した公開文書6件とローカル申請下書き1件の相対リンクは全件存在を確認した。絶対的なデータ安全保証を条件付きで許すと読めた草稿は修正済み。GitHub Aboutも理念と開発プレビューの説明へ更新し表示を確認した。
+The recorded final check states that node tools/verify-handoff.mjs passed 11/11 and git diff --check succeeded. It also records that relative links in six updated public documents and one local application draft existed. A draft that could be read as allowing an absolute data-safety guarantee was revised. The recorded GitHub About description was updated to describe the philosophy and development preview, and its display was checked.

@@ -1,12 +1,12 @@
 # ObsidianSyncOss
 
-WindowsとiPhoneでObsidianを使う課題から始まり、低コストでも安全性を犠牲にせず、長く蓄積したノートを守る同期OSSを目指します。\
-ノートは各端末のVaultに通常のMarkdownとして残し、クラウドは端末間同期の中継地点として扱います。\
-速度・便利さ・機能数より安全性を優先し、状態が分からないときは推測せずに停止します。\
-Remotely Saveの作者・Contributorとライセンスを尊重し、誰もが検証・改善できる公共的なOSSを目指します。
+This project began with a need for affordable, safe Obsidian sync between Windows and iPhone. \
+The goal is to keep notes as ordinary Markdown in each local Vault and reduce risk to notes accumulated over time. \
+The cloud is intended as a sync relay; safety comes before speed, convenience, or feature count. \
+When the state is unclear, stop instead of guessing. Respect Remotely Save's authors, contributors, and license terms. \
+The project aims to grow as a community-maintained open-source project that others can inspect, verify, and improve.
 
-理念の全文は [PROJECT_PHILOSOPHY.md](PROJECT_PHILOSOPHY.md) を参照してください。理念を公開文書・警告文・Release notesへ反映する手順は
-[PROJECT_COMMUNICATION_GUIDE.md](PROJECT_COMMUNICATION_GUIDE.md) に記載します。
+See [PROJECT_PHILOSOPHY.md](PROJECT_PHILOSOPHY.md) for the full principles. [PROJECT_COMMUNICATION_GUIDE.md](PROJECT_COMMUNICATION_GUIDE.md) explains how to apply them to public documents, warnings, and release notes. Reviewers can start with the [Reviewer Guide](REVIEWER_GUIDE.md), which summarizes the project's scope, evidence, and current limitations.
 
 ObsidianSyncOss is an independent open source project for exploring safe,
 manual synchronization of Markdown notes between Windows/iPhone clients and a
@@ -16,12 +16,8 @@ known.
 
 > **Development preview:** this repository is not an installable Obsidian
 > plugin and is not ready for a real Vault, a real R2 bucket, or an iPhone.
-> The current work is an offline core and test model. Do not place it in an
-> Obsidian `plugins` directory or point it at personal data.
-
-このプロジェクトは、ObsidianのMarkdownを安全に手動同期する仕組みを
-検証するためのOSS開発中コードです。現在は合成データを使うオフラインの
-コアと試験モデルだけで、実際のVault・R2・iPhoneで使えるプラグインではありません。
+> The current work is an offline core and test model using synthetic data.
+> Do not place it in an Obsidian `plugins` directory or point it at personal data.
 
 ## Why this project exists
 
@@ -99,14 +95,18 @@ Vault or a production bucket.
 
 ## Read next
 
-- [`START_HERE.md`](START_HERE.md) — project handoff and safe setup;
+- [`REVIEWER_GUIDE.md`](REVIEWER_GUIDE.md) — English overview of the project's scope, evidence, and current limitations.
+
+The following project specifications and implementation decisions are retained source documents in Japanese. The English reviewer guide provides context; it does not replace their technical requirements or applicable license records.
+
+- [`START_HERE.md`](START_HERE.md) — project handoff and safe setup (Japanese retained baseline);
 - [`docs/CODEX_IMPLEMENTATION_GUIDE.md`](docs/CODEX_IMPLEMENTATION_GUIDE.md) —
-  work packages and completion rules;
+  work packages and completion rules (Japanese retained baseline);
 - [`docs/IMPLEMENTATION_DECISIONS.md`](docs/IMPLEMENTATION_DECISIONS.md) —
-  decisions that keep the implementation and tests separated;
+  decisions that keep the implementation and tests separated (Japanese retained baseline);
 - [`docs/obsidian_sync_oss_detailed_spec_v1.0_20260906.md`](docs/obsidian_sync_oss_detailed_spec_v1.0_20260906.md)
-  — protocol and safety baseline;
-- [`progress/`](progress/) — implementation reports and remaining gates.
+  — protocol and safety baseline (Japanese retained baseline);
+- [`progress/`](progress/) — implementation reports and remaining gates (Japanese retained records).
 
 ## Roadmap
 

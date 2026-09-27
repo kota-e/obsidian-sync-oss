@@ -11,6 +11,8 @@ technical requirements and reuse permissions.
 
 For applying the philosophy to public descriptions, warnings, and release
 notes, see [PROJECT_COMMUNICATION_GUIDE.md](PROJECT_COMMUNICATION_GUIDE.md).
+For an English overview of the implementation, evidence, and retained
+Japanese baseline documents, start with [REVIEWER_GUIDE.md](REVIEWER_GUIDE.md).
 
 ## Project values and safety rules
 
@@ -112,9 +114,9 @@ For a pull request, describe:
 - dependency, license, provenance, or documentation changes.
 
 Keep one focused change per pull request when possible. Do not describe an
-offline model result as Windows, iPhone, R2, or real-Vault validation. Do not
-claim a stable release, data-loss prevention, or zero-data-loss guarantee
-without the required evidence.
+offline model result as Windows, iPhone, R2, or real-Vault validation. Describe
+release readiness and tested safety behavior only within the scope supported
+by evidence. Never promise that data loss is impossible.
 
 For an issue, include a small synthetic reproduction where possible. Remove
 note contents, account identifiers, access tokens, URLs containing secrets,

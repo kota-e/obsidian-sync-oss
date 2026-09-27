@@ -1,156 +1,148 @@
-# ObsidianSyncOss プロジェクト理念
+# ObsidianSyncOss Project Philosophy
 
-この文書は、このプロジェクトを作る理由と、技術・文書・公開活動に共通する判断の上位原則を記録します。詳細な同期仕様、実装判断、試験計画、ライセンス監査の代わりにはなりません。具体的な技術要件や利用条件は、それぞれの正本を確認してください。
+This document records why this project exists and the principles that guide technical, documentation, and public-facing decisions. It does not replace the detailed synchronization specifications, implementation decisions, test plans, or license audits. Consult those source documents for specific technical requirements and terms of use.
 
-## 1. 出発点
+## 1. Starting Point
 
-このプロジェクトは、WindowsとiPhoneでObsidianを使う際に、低コストでありながら安全で信頼できる同期手段を作りたいという、実際のユーザー課題から始まりました。
+This project began with a real user need: an affordable, safe, and reliable way to synchronize Obsidian between Windows and iPhone.
 
-目的は単に「同期を動かすこと」ではありません。
+The goal is not simply to make synchronization work.
 
-ユーザーが長期間蓄積したノートを失うリスクをできる限り低減し、ユーザー自身がデータを所有し続けられる同期OSSを作ることが目的です。
+The goal is to build open-source synchronization software that reduces, as far as practical, the risk of losing notes accumulated over many years and lets users continue to own their data.
 
 ## 2. Safety First
 
-このプロジェクトでは、安全性を速度・便利さ・機能数より優先します。
+Safety takes priority over speed, convenience, and the number of features.
 
-判断できない状況では、推測して処理を続けるのではなく停止してください。
+When the state cannot be determined, stop instead of guessing and continuing.
 
-特に以下を重要原則とします。
+In particular:
 
-- 通信失敗をファイル削除と解釈しない
-- LocalとRemoteの双方が変更されている場合、勝手に一方を採用しない
-- データを上書き・削除する前に必要な復旧情報を残す
-- 大量の破壊的変更を自動実行しない
-- 結果不明の処理を成功または失敗と推測しない
-- 古い処理を再起動後にそのまま再生しない
-- ユーザーの新しい編集を同期処理の都合で巻き戻さない
+- Never treat a communication failure as evidence that a file was deleted.
+- When both Local and Remote have changed, do not choose either side automatically.
+- Preserve the information needed for recovery before overwriting or deleting data.
+- Do not automatically carry out large destructive changes.
+- Do not guess whether an operation succeeded or failed when its outcome is unknown.
+- Do not replay a stale operation unchanged after a restart.
+- Do not roll back a user's newer edit because of synchronization processing.
 
-実装を簡単にする目的で、これらの安全条件を弱めないでください。
+Do not weaken these safety requirements to make implementation simpler.
 
-## 3. Local First / User Ownership
+## 3. Local First and User Ownership
 
-通常のMarkdownファイルを各端末のローカルVaultに保持することを基本とします。
+Ordinary Markdown files should remain in each device's local Vault.
 
-クラウドはユーザーデータの所有者ではなく、安全な端末間同期のための中継地点です。
+The cloud is a relay for safe synchronization between devices; it does not own the user's data.
 
-このOSSを利用しなくなっても、ユーザーが通常のMarkdownとしてノートを利用できることを重視します。
+Users should be able to keep using their notes as ordinary Markdown even if they stop using this open-source project.
 
-特定のクラウドサービスや本プロジェクトへのロックインを避けてください。
+Avoid locking users into a particular cloud service or this project.
 
-## 4. 低コストだが、安全性を犠牲にしない
+## 4. Low Cost Without Sacrificing Safety
 
-低コストで利用できることは重要な目的の一つです。
+Affordable use is one of the project's important goals.
 
-Cloudflare R2などを利用し、小規模な利用者が高額な継続費用を必要としない構造を目指します。
+The project aims to use services such as Cloudflare R2 to avoid high ongoing costs for small-scale users.
 
-ただし、無料化やコスト削減を理由に安全機能を外してはいけません。
+Do not remove safety features to make the project free or reduce costs.
 
-「安いこと」より「データを守ること」を優先してください。
+Protecting data takes priority over being cheap.
 
-## 5. Remotely Saveへの敬意
+## 5. Respect for Remotely Save
 
-このプロジェクトはRemotely Saveと、その作者・Contributorの成果から大きな影響を受けています。
+Remotely Save and the work of its author and contributors have strongly influenced this project.
 
-元プロジェクトを否定したり、その成果を自分たちだけのもののように扱ったりしないでください。
+Do not dismiss the original project or present its work as if it were ours alone.
 
-以下を守ってください。
+Follow these rules:
 
-- Remotely Saveを起点・参考元とした事実を明記する
-- 元作者・Contributorのクレジットを保持する
-- Apache License等、確認済みの利用条件を守る
-- 許可されていないProコードを利用しない
-- 有料機能を無断で無料化することを目的にしない
-- 「公式後継」など元作者の承認を誤認させる表現をしない
-- 元作者や開発停滞を攻撃的・否定的に表現しない
+- Clearly state that Remotely Save was a starting point and a source of reference.
+- Preserve credit to the original author and contributors.
+- Follow the verified terms of use, including the Apache License where applicable.
+- Do not use Pro code without authorization.
+- The project is not intended to make paid features available for free without authorization.
+- Do not use wording such as “official successor” that could mislead people about the original author's endorsement.
+- Do not attack or speak negatively about the original author or the pace of development.
 
-OSSとして許可された改変・再利用の権利は正当に利用しますが、その権利を元作者への敬意を失う理由にはしません。
+Use the rights that open-source licenses grant for modification and reuse, but do not treat those rights as a reason to lose respect for the original authors.
 
-## 6. 継続的に保守できるOSS
+## 6. An Open-Source Project That Can Be Maintained
 
-一人の開発者しか理解できないプロジェクトにしないことも重要な目的です。
+It is important that the project not become understandable only to one developer.
 
-コードだけでなく、以下を記録してください。
+Record more than code. Keep the following understandable to future maintainers:
 
-- 仕様
-- 設計判断
-- テスト
-- コード由来
-- ライセンス
-- 障害時の挙動
-- リリース方法
+- specifications;
+- design decisions;
+- tests;
+- code provenance;
+- licenses;
+- behavior during failures; and
+- release procedures.
 
-将来、現在の作者が開発を続けられなくなっても、別のContributorが理解して保守できる構造を目指してください。
+Aim for a structure that other contributors can understand and maintain if the current author can no longer continue development.
 
-## 7. AI開発に対する考え方
+## 7. A Careful Approach to AI-Assisted Development
 
-このプロジェクトではCodexを積極的に利用します。
+This project makes active use of Codex.
 
-しかし、「AIが生成したから正しい」とは判断しません。
+However, code is not correct simply because AI generated it.
 
-コードを生成した場合も、以下によって検証することを前提としてください。
+Generated code must still be checked for:
 
-- 仕様との一致
-- コードの由来
-- ライセンス
-- 自動テスト
-- 異常系
-- 回帰
-- Windows / iPhone実機
+- consistency with the specifications;
+- code provenance;
+- license compliance;
+- automated tests;
+- failure cases;
+- regressions; and
+- behavior on real Windows and iPhone devices.
 
-実装の都合でテストの期待値を安全でない方向へ変更してはいけません。
+Do not change test expectations in an unsafe direction just to make implementation easier.
 
-## 8. OSSとして公開する理由
+## 8. Why This Project Is Open Source
 
-このプロジェクトは、開発者本人のObsidian同期問題を解決することから始まりました。
+This project began as a way to solve the developer's own Obsidian synchronization problem.
 
-しかし、同じ課題を持つ他のユーザーにも利用・検証・改善してもらえるものにしたいと考えています。
+The aim is to make it useful to other people with the same problem, so they can use it, verify it, and improve it.
 
-自分専用ツールではなく、
-
-「自分が本当に使いたいものを、他の人も安心して検証・改善できる公共的なOSSへ育てる」
-
-ことがGitHubで公開する理由です。
+The reason for publishing it on GitHub is to grow a public, community-oriented open-source project: one that the developer would truly want to use and that others can confidently inspect, verify, and improve.
 
 ## 9. iCloud
 
-iCloudは将来的に重要な対象ですが、初期実装より安全性を優先します。
+iCloud is an important future target, but safety takes priority over implementing it early.
 
-要件は現在から残しますが、R2同期コアが十分に確立するまでは実装を急がないでください。
+Keep the requirements on record now, but do not rush into implementation until the R2 synchronization core is well established.
 
-R2同期方式を、そのままiCloudへ当てはめられるとは仮定しないでください。
+Do not assume that the R2 synchronization method can be applied to iCloud as-is.
 
-## 10. このプロジェクトが目指すもの
+## 10. What This Project Aims to Be
 
-最も多機能な同期プラグインを目指しているのではありません。
+The goal is not to build the synchronization plugin with the most features.
 
-目指しているのは、
+The goal is an Obsidian synchronization project that can explain what it will do, stops safely when something is unclear, supports users in retaining ownership of their data, and can be maintained by a community over the long term.
 
-「何が起きるか説明でき、分からないときには安全側に止まり、ユーザーが自分のデータを所有し続けられ、長期間コミュニティで保守できるObsidian同期OSS」
+## Applying These Principles to Documents and Decisions
 
-です。
+Apply this philosophy to:
 
-## 今後の文書・判断への反映
+- the README;
+- the GitHub repository description;
+- the About section and project philosophy;
+- `CONTRIBUTING.md`;
+- `SECURITY.md`;
+- project and open-source applications, including those submitted to OpenAI;
+- release notes;
+- design decisions;
+- user-facing warnings; and
+- guidance for contributors.
 
-この理念は、以下の文書・判断に反映してください。
+Do not exaggerate technical facts in the name of this philosophy. Do not make claims that cannot be verified, such as “will never lose data,” “completely safe,” “safer than Remotely Save,” or “official successor.”
 
-- README
-- GitHub repository description
-- About / Project philosophy
-- CONTRIBUTING.md
-- SECURITY.md
-- OpenAI等へのプロジェクト・OSS申請文章
-- Release notes
-- 設計判断
-- ユーザー向け警告文
-- Contributorへの説明
+If this philosophy conflicts with a technical specification, do not resolve the conflict by unilateral interpretation. Record and report the conflicting sections, the available options, and the safety impact of each option. Also consult the detailed specifications, test specifications, and license audit results. Do not make a change that weakens safety until the conflict has been resolved and the resolution recorded.
 
-理念を理由に技術的事実を誇張してはいけません。たとえば「絶対にデータを失わない」「完全に安全」「Remotely Saveより安全」「公式後継」のような、検証できない表現は使用しないでください。
+### The Original Project's Revenue and Value
 
-理念と技術仕様が衝突した場合は、独断で解釈して進めないでください。衝突箇所、考えられる選択肢、それぞれの安全性への影響を記録して報告してください。詳細仕様・試験仕様・ライセンス監査結果もあわせて確認し、解決が記録されるまで安全性を弱める変更を行わないでください。
+The creator's intention is not to take revenue away from the original authors. However, we cannot guarantee that publishing an open-source project will have no effect on the original project's usage or revenue.
 
-### 元プロジェクトの売上・価値について
-
-元作者の売上を奪いたくないという意図はありますが、公開OSSが元プロジェクトの利用状況や売上に一切影響を与えないことまでは保証できません。
-
-そのため、「売上を奪わないことを保証する」とは表現しません。GitHubやOpenAI等への申請を含む説明では、「有料機能の無断無料化や、元プロジェクトの価値を否定することを目的としない」と表現してください。結果への影響を保証するのではなく、プロジェクトの目的と行動方針を正確に説明します。
+Therefore, do not say that the project guarantees it will not affect the original project's revenue. In GitHub or OpenAI applications and other explanations, use this wording: “The project is not intended to make paid features available for free without authorization or to deny the value of the original project.” Describe the project's intent and conduct accurately; do not guarantee outcomes.
